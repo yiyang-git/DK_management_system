@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验收记录</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <h2>验收数据封装与管理</h2>
+    <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
+        <h3 class="menu"><a href="/Manufacturing/receive_table/">数据列表</a></h3>
+        <p class="menu"><a href="/Manufacturing/receive/">新增数据</a></p>
+    </div>
+    <div class="col-lg-10">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>工号</th>
+                <th>问题描述</th>
+                <th>处理方案</th>
+                <th>责任班组</th>
+                <th>负责调度</th>
+                <th>来源</th>
+                <th>验收人</th>
+                <th>完成情况</th>
+                <th>操作</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data_list %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.worker }}</td>
+                    <td width="250px">{{ item.problem }}</td>
+                    <td width="250px">{{ item.solution }}</td>
+                    <td>{{ item.banzu }}</td>
+                    <td>{{ item.diaodu }}</td>
+                    <td>{{ item.laiyuan }}</td>
+                    <td>{{ item.yanshouren }}</td>
+                    <td>{{ item.wancheng }}</td>
+                    <td>
+                        <a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> |
+                        <a href="#"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

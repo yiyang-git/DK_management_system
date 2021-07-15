@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验收记录</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <h2>不合格单数据封装与管理</h2>
+    <div class="col-lg-1" style="border-right-style: solid; border-right-width: 1px">
+        <h3 class="menu"><a href="/Manufacturing/unqual_table/">数据列表</a></h3>
+        <p class="menu"><a href="/Manufacturing/unqual/">新增数据</a></p>
+    </div>
+    <div class="col-lg-11">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>通知单号</th>
+                <th>不合格类型</th>
+                <th>工厂</th>
+                <th>不合格发现时间</th>
+                <th>不合格单创建时间</th>
+                <th>问题描述</th>
+                <th>处置方式</th>
+                <th>供应商</th>
+                <th>评审结果</th>
+                <th>缺陷文本</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data_list %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.inform }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.fac }}</td>
+                    <td>{{ item.found_date }}</td>
+                    <td>{{ item.creat_date }}</td>
+                    <td>{{ item.problem }}<a href="#"><span class="glyphicon glyphicon-search"></span></a></td>
+                    <td>{{ item.chuzhi }}</td>
+                    <td>{{ item.gongying }}</td>
+                    <td>{{ item.result }}</td>
+                    <td>{{ item.defect_text }}</td>
+                    <td>
+                        <a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> |
+                        <a href="#"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

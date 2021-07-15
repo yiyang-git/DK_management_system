@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验收记录</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container">
+    <h2>验收数据封装与管理</h2>
+    <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
+        <p class="menu"><a href="/Manufacturing/receive_table/">数据列表</a></p>
+        <h2 class="menu"><a href="/Manufacturing/receive/">新增数据</a></h2>
+    </div>
+    <div class="col-lg-10">
+        <form role="form" action="/Manufacturing/receive/" method="post">
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">时间：</label>
+                <div class="col-lg-9">
+                    <input type="date" class="form-control" id="record_date" name="date">
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">工号：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="worker" name="worker" placeholder="请输入工号：">
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label>问题描述：</label>
+                <textarea class="form-control" rows="5" name="problem"></textarea>
+            </div>
+            <div class="form-group col-lg-12">
+                <label>处理方案：</label>
+                <textarea class="form-control" rows="5" name="solution"></textarea>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">责任班组：</label>
+                <div class="col-lg-9">
+                    <select class="form-control" name="banzu">
+                        <option>总二班</option>
+                        <option>总三班</option>
+                        <option>总四班</option>
+                        <option>再制造班</option>
+                        <option>南通项目组</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">负责调度：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" placeholder="请输入负责调度人：" name="diaodu">
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">来源：</label>
+                <div class="col-lg-9">
+                    <select class="form-control" name="laiyuan">
+                        <option>厂验</option>
+                        <option>内验</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">验收人：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" placeholder="请输入验收人：" name="yanshouren">
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label class="col-lg-2 control-label">完成情况：</label>
+                <div class="col-lg-10">
+                    <select class="form-control" name="wancheng">
+                        <option>已完成</option>
+                        <option>未完成</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" style="text-align: right">
+                <button type="submit" class="btn btn-outline-info">提交数据</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

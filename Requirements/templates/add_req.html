@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container">
+    <h2>新增需求记录</h2>
+    <form role="form" method="post" action="/Requirements/add_req/">
+        <div class="form-group col-lg-12">
+            <label class="col-lg-2 control-label">客户：</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="customer" name="customer" placeholder="请输入客户单位名称">
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">产品类别：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="product_type" name="product_type" placeholder="请输入产品类别：">
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">设备编号：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="product_code" name="product_code" placeholder="请输入设备编号">
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">交货日期：</label>
+            <div class="col-lg-9">
+                <input type="date" class="form-control" id="date" name="date">
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">交货地点：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="place" name="place" placeholder="请输入交货地点">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>工程条件：</label>
+            <textarea class="form-control" rows="5" name="condition"></textarea>
+        </div>
+        <div class="form-group">
+            <label>工程重难点：</label>
+            <textarea class="form-control" rows="5" name="nandian"></textarea>
+        </div>
+        <div class="form-group">
+            <label>客户要求及其他注意事项：</label>
+            <textarea class="form-control" rows="5" name="attention"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-1" for="inputfile">上传设计任务书文件:</label>
+            <input class="col-lg-11" type="file" id="inputfile" name="inputfile">
+        </div>
+        <div class="form-group" style="text-align: right">
+            <button type="submit" class="btn btn-outline-info">提交数据</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
