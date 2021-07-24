@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问题帮助</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
+        <h2 class="menu" style="font-size: 20px"><a href="/Helps/help_table/">数据知识管理问题</a></h2>
+        <p class="menu"><a href="/Helps/help_table/" style="font-size:9pt">问题总结</a></p>
+        <p class="menu"><a href="/Helps/add_help/" style="font-size:9pt">提出问题</a></p>
+        <h3 class="menu" style="font-size: 30px"><a href="/Helps/documentations/">工具使用帮助</a></h3>
+        <p class="menu"><a href="/Helps/documentations/" style="font-size:9pt">工具使用帮助文档</a></p>
+        <p class="menu"><a href="/Helps/suggest_table/" style="font-size:15pt">改进与建议</a></p>
+    </div>
+    <div class="col-lg-10">
+        <div class="page-header">
+            <h1 style="font-size: 40px">
+                改进与建议<small>您在使用该系统过程中有哪些不便</small>
+            </h1>
+            <p>
+                <span style="font-size: medium">在此处查看大家提出的改进意见</span>
+            </p>
+        </div>
+        <table class="table table-hover table-striped" style="font-size:8.5pt">
+            <thead>
+            <tr>
+                <th>改进建议</th>
+                <th></th>
+                <th>采纳情况</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data_list %}
+                <tr>
+                    <td>{{ item.suggest }}</td>
+                    <td>
+                        {% if item.completion == "未采纳" %}
+                            <td style="color: red">{{ item.completion }}</td>
+                        {% else %}
+                            <td>{{ item.completion }}</td>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% load ID_edit %}
+                        <a href={{ item.nid|ID_edit:"/Helps/complete_suggest?ID=" }}><span
+                                class="glyphicon glyphicon-star"></span>该建议已采纳</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            <a href="/Helps/add_suggest/" style="font-size: large"><span class="glyphicon glyphicon-edit"></span>
+                提出你的建议!
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>外协问题</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <h1>外协问题封装与管理</h1>
+    <div class="col-lg-1" style="border-right-style: solid; border-right-width: 1px">
+        <h2 class="menu"><a href="/Manufacturing/outer_table/">问题列表</a></h2>
+        <p class="menu"><a href="/Manufacturing/add_outer/" style="font-size:9pt">新增问题</a></p>
+    </div>
+    <div class="col-lg-11">
+        <table class="table table-hover table-striped" style="font-size:8.5pt">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>问题</th>
+                <th>外部负责机构</th>
+                <th>外部负责人</th>
+                <th>问题是否解决</th>
+                <th>问题备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data_list %}
+                {% load ID_edit %}
+                <tr>
+                    <td>{{ item.nid }}</td>
+                    <td>{{ item.problem }}
+                        <a href="#" data-toggle="modal" data-target={{ item.nid|ID_edit:"#myModal" }}><span
+                                class="glyphicon glyphicon-search"></span></a>
+                        <div class="modal fade" id={{ item.nid|ID_edit:"myModal" }} tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <h4 class="modal-title" id="myModalLabel">问题详情</h4>
+                                    </div>
+                                    <div class="modal-body" style="font-size:11pt">{{ item.problem }}</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                    </td>
+                    <td>{{ item.institution }}</td>
+                    <td>{{ item.charger }}</td>
+                    <td>{{ item.completion }}</td>
+                    <td>{{ item.note }}</td>
+                    <td>
+                        {% load ID_edit %}
+                        <a href={{ item.nid|ID_edit:"/Manufacturing/edit_outer?ID=" }}><span
+                                class="glyphicon glyphicon-edit"></span> 编辑</a> |
+                        <a href={{ item.nid|ID_edit:"/Manufacturing/delete_outer?ID=" }}><span
+                                class="glyphicon glyphicon-trash"></span> 删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -12,6 +12,7 @@
             border-left-width: 3px;
         }
     </style>
+
 </head>
 <body>
 <div id="index_page"></div>
@@ -19,29 +20,37 @@
     $('#index_page').load('/static/html/index.html')
 </script>
 <div class="container">
-    <h2>不合格单数据封装与管理</h2>
+    <h1>新增不合格单</h1>
     <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
-        <p class="menu"><a href="/Manufacturing/unqual_table/">数据列表</a></p>
-        <h2 class="menu"><a href="/Manufacturing/unqual/">新增数据</a></h2>
+        <p class="menu"><a href="/Manufacturing/unqual_table/" style="font-size:9pt">数据列表</a></p>
+        <h2 class="menu"><a href="/Manufacturing/add_unqual/">新增数据</a></h2>
     </div>
-    <div class="col-lg-10">
-        <form role="form" action="/Manufacturing/receive/" method="post">
+    <div class="col-lg-10" style="font-size:9pt">
+        <form role="form" action="/Manufacturing/add_unqual/" method="post">
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">ID：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="ID" name="ID" style="font-size:10pt" disabled="disabled"
+                           value={{ ID_new }}>
+                </div>
+            </div>
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">时间：</label>
                 <div class="col-lg-9">
-                    <input type="date" class="form-control" id="date" name="date">
+                    <input type="date" class="form-control" id="date" name="date" style="font-size:9pt">
                 </div>
             </div>
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">通知单号：</label>
                 <div class="col-lg-9">
-                    <input type="text" class="form-control" id="inform" name="inform" placeholder="请输入通知单号：">
+                    <input type="text" class="form-control" id="inform" name="inform" placeholder="请输入通知单号"
+                           style="font-size:9pt">
                 </div>
             </div>
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">不合格类型：</label>
                 <div class="col-lg-9">
-                    <select class="form-control" name="type">
+                    <select class="form-control" name="type" style="font-size:9pt">
                         <option>生产不合格通知单</option>
                         <option>大修改造项目不合格通知单</option>
                         <option>采购不合格通知单</option>
@@ -52,33 +61,34 @@
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">工厂：</label>
                 <div class="col-lg-9">
-                    <input type="text" class="form-control" id="fac" name="fac" placeholder="请输入工厂编号：">
+                    <input type="text" class="form-control" id="fac" name="fac" placeholder="请输入工厂编号"
+                           style="font-size:9pt">
                 </div>
             </div>
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">不合格发现时间：</label>
                 <div class="col-lg-9">
-                    <input type="date" class="form-control" id="found_date" name="found_date">
+                    <input type="date" class="form-control" id="found_date" name="found_date" style="font-size:9pt">
                 </div>
             </div>
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">不合格单创建时间：</label>
                 <div class="col-lg-9">
-                    <input type="date" class="form-control" id="creat_date" name="creat_date">
+                    <input type="date" class="form-control" id="creat_date" name="creat_date" style="font-size:9pt">
                 </div>
             </div>
             <div class="form-group col-lg-12">
                 <label>问题描述：</label>
-                <textarea class="form-control" rows="2" name="problem"></textarea>
+                <textarea class="form-control" rows="2" name="problem" style="font-size:9pt"></textarea>
             </div>
             <div class="form-group col-lg-12">
                 <label>问题详述：</label>
-                <textarea class="form-control" rows="5" name="pro_detail"></textarea>
+                <textarea class="form-control" rows="5" name="pro_detail" style="font-size:9pt"></textarea>
             </div>
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">处置方式：</label>
                 <div class="col-lg-9">
-                    <select class="form-control" name="chuzhi">
+                    <select class="form-control" name="chuzhi" style="font-size:9pt">
                         <option>让步接收</option>
                         <option>厂内返工</option>
                         <option>厂内返修</option>
@@ -90,21 +100,24 @@
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">供应商：</label>
                 <div class="col-lg-9">
-                    <input type="text" class="form-control" placeholder="请输入供应商：" name="gongying">
+                    <input type="text" class="form-control" placeholder="请输入供应商：" name="gongying" style="font-size:9pt">
                 </div>
             </div>
             <div class="form-group col-lg-12">
                 <label>评审结果：</label>
-                <textarea class="form-control" rows="5" name="result"></textarea>
+                <textarea class="form-control" rows="5" name="result" style="font-size:9pt"></textarea>
             </div>
             <div class="form-group col-lg-12">
                 <label class="col-lg-2 control-label">缺陷文本：</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" placeholder="请输入缺陷描述：" name="defect_text">
+                    <input type="text" class="form-control" placeholder="请输入缺陷描述：" name="defect_text"
+                           style="font-size:9pt">
                 </div>
             </div>
             <div class="form-group" style="text-align: right">
-                <button type="submit" class="btn btn-outline-info">提交数据</button>
+                <button type="submit" class="btn btn-outline-info" onclick="return confirm('确定提交当前数据？')"
+                        style="font-size:10pt">提交数据
+                </button>
             </div>
         </form>
     </div>

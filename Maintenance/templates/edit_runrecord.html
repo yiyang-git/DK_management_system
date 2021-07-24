@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运维记录编辑</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container">
+    <h1>编辑不合格记录</h1>
+    <form role="form" action="/Maintenance/edit_runRecord/" method="post" style="font-size: 10pt">
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">ID：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="ID" name="ID" style="font-size:10pt" value={{ item.nid }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">时间：</label>
+            <div class="col-lg-9">
+                <input type="date" class="form-control" id="date" name="date" style="font-size:9pt"
+                       value={{ item.date }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">设备编号：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="equipment" name="equipment" style="font-size:9pt"
+                       value={{ item.equipment }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">维护负责人：</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="charger" name="charger" style="font-size:9pt"
+                       value={{ item.charger }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">电路是否正常：</label>
+            <div class="col-lg-9">
+                <select class="form-control" name="circuit" style="font-size:9pt">{{ item.circuit }}
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">螺栓是否正常：</label>
+            <div class="col-lg-9">
+                <select class="form-control" name="screw" style="font-size:9pt">{{ item.screw }}
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">形变是否正常：</label>
+            <div class="col-lg-9">
+                <select class="form-control" name="deformation" style="font-size:9pt">{{ item.deformation }}
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">是否正常工作：</label>
+            <div class="col-lg-9">
+                <select class="form-control" name="work" style="font-size:9pt">{{ item.work }}
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-6">
+            <label class="col-lg-3 control-label">全部检查点是否检查完毕：</label>
+            <div class="col-lg-9">
+                <select class="form-control" name="all" style="font-size:9pt">{{ item.all }}
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-12">
+            <label>备注：</label>
+            <textarea class="form-control" rows="5" name="note" style="font-size:9pt">{{ item.note }}</textarea>
+        </div>
+
+        <div class="form-group" style="text-align: right">
+            <button type="submit" class="btn btn-outline-info" onclick="return confirm('确定提交当前数据？')"
+                    style="font-size:10pt">提交数据
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问题帮助</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
+        <h2 class="menu" style="font-size: 30px"><a href="/Helps/help_table/">数据知识管理问题</a></h2>
+        <p class="menu"><a href="/Helps/help_table/" style="font-size:9pt">问题总结</a></p>
+        <p class="menu"><a href="/Helps/add_help/" style="font-size:15pt">提出问题</a></p>
+        <h3 class="menu" style="font-size: 20px"><a href="/Helps/documentations/">工具使用帮助</a></h3>
+        <p class="menu"><a href="/Helps/documentations/" style="font-size:9pt">工具使用帮助文档</a></p>
+        <p class="menu"><a href="/Helps/suggest_table/" style="font-size:9pt">改进与建议</a></p>
+    </div>
+    <div class="col-lg-10">
+        <form role="form" action="/Helps/add_help/" method="post" style="font-size: 10pt">
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">ID：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="ID" name="ID" style="font-size:10pt" value={{ ID_new }}>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">问题分类：</label>
+                <div class="col-lg-9">
+                    <select class="form-control" name="classes" style="font-size:9pt">
+                        <option>需求数据</option>
+                        <option>制造数据</option>
+                        <option>运维数据</option>
+                        <option>试验数据</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-lg-12">
+                <label>问题详情：</label>
+                <textarea class="form-control" rows="5" name="problem" style="font-size:9pt"></textarea>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">解决情况：</label>
+                <div class="col-lg-9">
+                    <select class="form-control" name="completion" style="font-size:9pt">
+                        <option>未解决</option>
+                        <option>已解决</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-info" onclick="return confirm('确定提交当前数据？')"
+                        style="font-size:10pt">提交数据
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

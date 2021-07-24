@@ -781,138 +781,342 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
     </user>
     <user id="235" parent="1" name="root"/>
-    <table id="236" parent="8" name="manufacturing_manreceive"/>
-    <table id="237" parent="8" name="manufacturing_manunqual"/>
-    <table id="238" parent="8" name="requirements_require"/>
-    <column id="239" parent="236" name="id">
+    <table id="236" parent="8" name="experiment_test"/>
+    <table id="237" parent="8" name="helps_helps"/>
+    <table id="238" parent="8" name="helps_suggest"/>
+    <table id="239" parent="8" name="maintenance_fault"/>
+    <table id="240" parent="8" name="maintenance_runrecord"/>
+    <table id="241" parent="8" name="manufacturing_manouter"/>
+    <table id="242" parent="8" name="manufacturing_manreceive"/>
+    <table id="243" parent="8" name="manufacturing_manunqual"/>
+    <table id="244" parent="8" name="requirements_require"/>
+    <column id="245" parent="236" name="id">
       <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="240" parent="236" name="date">
+    <column id="246" parent="236" name="nid">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
     </column>
-    <column id="241" parent="236" name="worker">
+    <column id="247" parent="236" name="date">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="242" parent="236" name="problem">
+    <column id="248" parent="236" name="equipment">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="243" parent="236" name="solution">
+    <column id="249" parent="236" name="charger">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="244" parent="236" name="banzu">
+    <column id="250" parent="236" name="detail">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="245" parent="236" name="diaodu">
+    <column id="251" parent="236" name="conclusion">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="246" parent="236" name="laiyuan">
-      <Position>8</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="247" parent="236" name="yanshouren">
-      <Position>9</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="248" parent="236" name="wancheng">
-      <Position>10</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="249" parent="237" name="id">
+    <key id="252" parent="236" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="253" parent="237" name="id">
       <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="250" parent="237" name="date">
+    <column id="254" parent="237" name="nid">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
     </column>
-    <column id="251" parent="237" name="inform">
+    <column id="255" parent="237" name="classes">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="252" parent="237" name="type">
+    <column id="256" parent="237" name="problem">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="253" parent="237" name="fac">
+    <column id="257" parent="237" name="completion">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="254" parent="237" name="found_date">
+    <key id="258" parent="237" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="259" parent="238" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="260" parent="238" name="nid">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="261" parent="238" name="suggest">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="262" parent="238" name="completion">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <key id="263" parent="238" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="264" parent="239" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="265" parent="239" name="nid">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="266" parent="239" name="date">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="267" parent="239" name="problem">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="268" parent="239" name="risk_level">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="269" parent="239" name="charger">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="255" parent="237" name="creat_date">
+    <column id="270" parent="239" name="reportperson">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="256" parent="237" name="gongying">
+    <column id="271" parent="239" name="completion">
       <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="257" parent="237" name="result">
+    <column id="272" parent="240" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="273" parent="240" name="nid">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="274" parent="240" name="date">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="275" parent="240" name="equipment">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="276" parent="240" name="charger">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="277" parent="240" name="circuit">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="278" parent="240" name="screw">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="279" parent="240" name="deformation">
+      <Position>8</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="280" parent="240" name="work">
       <Position>9</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="258" parent="237" name="defect_text">
+    <column id="281" parent="240" name="all">
       <Position>10</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="259" parent="237" name="problem">
+    <column id="282" parent="240" name="note">
       <Position>11</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="260" parent="237" name="pro_detail">
-      <Position>12</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="261" parent="237" name="chuzhi">
-      <Position>13</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="262" parent="238" name="id">
+    <key id="283" parent="240" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="284" parent="241" name="id">
       <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="263" parent="238" name="customer">
+    <column id="285" parent="241" name="nid">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
     </column>
-    <column id="264" parent="238" name="product_type">
+    <column id="286" parent="241" name="problem">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="265" parent="238" name="product_code">
+    <column id="287" parent="241" name="institution">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="266" parent="238" name="date">
+    <column id="288" parent="241" name="charger">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="267" parent="238" name="place">
+    <column id="289" parent="241" name="completion">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="268" parent="238" name="condition">
+    <column id="290" parent="241" name="note">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="269" parent="238" name="nandian">
+    <key id="291" parent="241" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="292" parent="242" name="id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="293" parent="242" name="date">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="294" parent="242" name="worker">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="295" parent="242" name="problem">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="296" parent="242" name="solution">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="297" parent="242" name="banzu">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="298" parent="242" name="diaodu">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="299" parent="242" name="laiyuan">
       <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="270" parent="238" name="attention">
+    <column id="300" parent="242" name="yanshouren">
       <Position>9</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="271" parent="238" name="inputfile">
+    <column id="301" parent="242" name="wancheng">
+      <Position>10</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="302" parent="243" name="id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="303" parent="243" name="date">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="304" parent="243" name="inform">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="305" parent="243" name="type">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="306" parent="243" name="fac">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="307" parent="243" name="found_date">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="308" parent="243" name="creat_date">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="309" parent="243" name="gongying">
+      <Position>8</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="310" parent="243" name="result">
+      <Position>9</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="311" parent="243" name="defect_text">
+      <Position>10</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="312" parent="243" name="problem">
+      <Position>11</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="313" parent="243" name="pro_detail">
+      <Position>12</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="314" parent="243" name="chuzhi">
+      <Position>13</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="315" parent="244" name="id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="316" parent="244" name="customer">
+      <Position>2</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="317" parent="244" name="product_type">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="318" parent="244" name="product_code">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="319" parent="244" name="date">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="320" parent="244" name="place">
+      <Position>6</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="321" parent="244" name="condition">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="322" parent="244" name="nandian">
+      <Position>8</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="323" parent="244" name="attention">
+      <Position>9</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <column id="324" parent="244" name="inputfile">
       <Position>10</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>

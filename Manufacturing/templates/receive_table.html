@@ -19,12 +19,12 @@
     $('#index_page').load('/static/html/index.html')
 </script>
 <div class="container-fluid">
-    <h2>验收数据封装与管理</h2>
+    <h1>验收数据封装与管理</h1>
     <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
-        <h3 class="menu"><a href="/Manufacturing/receive_table/">数据列表</a></h3>
-        <p class="menu"><a href="/Manufacturing/receive/">新增数据</a></p>
+        <h2 class="menu"><a href="/Manufacturing/receive_table/">数据列表</a></h2>
+        <p class="menu"><a href="/Manufacturing/add_receive/" style="font-size:9pt">新增数据</a></p>
     </div>
-    <div class="col-lg-10">
+    <div class="col-lg-10" style="font-size:9pt">
         <table class="table table-hover table-striped">
             <thead>
             <tr>
@@ -44,6 +44,7 @@
             <tbody>
             {% for item in data_list %}
                 <tr>
+
                     <td>{{ item.date }}</td>
                     <td>{{ item.worker }}</td>
                     <td width="250px">{{ item.problem }}</td>
@@ -54,8 +55,11 @@
                     <td>{{ item.yanshouren }}</td>
                     <td>{{ item.wancheng }}</td>
                     <td>
-                        <a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> |
-                        <a href="#"><span class="glyphicon glyphicon-trash"></span> 删除</a>
+                        {% load ID_edit %}
+                        <a href={{ item.ID|ID_edit:"/Manufacturing/edit_receive?ID=" }}><span
+                                class="glyphicon glyphicon-edit"></span> 编辑</a>|
+                        <a href={{ item.ID|ID_edit:"/Manufacturing/delete_receive?ID=" }}><span
+                                class="glyphicon glyphicon-trash"></span> 删除</a>
                     </td>
                 </tr>
             {% endfor %}

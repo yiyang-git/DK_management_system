@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>试验数据记录</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container">
+    <h1>新增试验数据</h1>
+    <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
+        <p class="menu"><a href="/Experiment/test_table/" style="font-size:9pt">数据列表</a></p>
+        <h2 class="menu"><a href="/Experiment/add_test/">新增数据</a></h2>
+    </div>
+    <div class="col-lg-10" style="font-size:9pt">
+        <form role="form" action="/Experiment/add_test/" method="post">
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">ID：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="ID" name="ID" style="font-size:10pt" value={{ ID_new }}>
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">日期：</label>
+                <div class="col-lg-9">
+                    <input type="date" class="form-control" id="date" name="date" style="font-size: 10pt">
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">设备编号：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="equipment" name="equipment" style="font-size:10pt"
+                           placeholder="请输入设备编号">
+                </div>
+            </div>
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">试验负责人：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="charger" name="charger" style="font-size:10pt"
+                           placeholder="请输入本次的试验负责人">
+                </div>
+            </div>
+
+            <div class="form-group col-lg-12">
+                <label>试验详情：</label>
+                <textarea class="form-control" rows="3" name="detail" style="font-size:10pt"></textarea>
+            </div>
+            <div class="form-group col-lg-12">
+                <label>试验结论：</label>
+                <textarea class="form-control" rows="3" name="conclusion" style="font-size:10pt"></textarea>
+            </div>
+            <div class="form-group" style="text-align: right">
+                <button type="submit" class="btn btn-outline-info" onclick="return confirm('确定提交当前数据？')"
+                        style="font-size:10pt">提交数据
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

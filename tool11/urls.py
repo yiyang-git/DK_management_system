@@ -21,6 +21,10 @@ from . import view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', view.show_homepage),
-    path('Requirements/', include('Requirements.urls')),
+    path('', view.show_homepage),
+    path('Requirements/', include('Requirements.urls')),  # include是为了将子项目的url完成拼接
     path('Manufacturing/', include('Manufacturing.urls')),
+    path('Maintenance/', include('Maintenance.urls')),
+    path('Experiment/', include('Experiment.urls')),
+    path('Helps/', include('Helps.urls'))
 ]

@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Require(models.Model):
+    ID = models.IntegerField()
     customer = models.CharField(max_length=32, null=True)
     product_type = models.CharField(max_length=32, null=True)
     product_code = models.CharField(max_length=32, null=True)

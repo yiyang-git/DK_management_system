@@ -19,37 +19,45 @@
     $('#index_page').load('/static/html/index.html')
 </script>
 <div class="container">
-    <h2>验收数据封装与管理</h2>
+    <h1>新增验收记录</h1>
     <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
-        <p class="menu"><a href="/Manufacturing/receive_table/">数据列表</a></p>
-        <h2 class="menu"><a href="/Manufacturing/receive/">新增数据</a></h2>
+        <p class="menu"><a href="/Manufacturing/receive_table/" style="font-size:9pt">数据列表</a></p>
+        <h2 class="menu"><a href="/Manufacturing/add_receive/">新增数据</a></h2>
     </div>
-    <div class="col-lg-10">
-        <form role="form" action="/Manufacturing/receive/" method="post">
+    <div class="col-lg-10" style="font-size:9pt">
+        <form role="form" action="/Manufacturing/add_receive/" method="post">
+            <div class="form-group col-lg-6">
+                <label class="col-lg-3 control-label">ID：</label>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control" id="ID" name="ID" style="font-size:10pt" disabled="disabled"
+                           value={{ ID_new }}>
+                </div>
+            </div>
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">时间：</label>
                 <div class="col-lg-9">
-                    <input type="date" class="form-control" id="record_date" name="date">
+                    <input type="date" class="form-control" id="record_date" name="date" style="font-size:10pt">
                 </div>
             </div>
             <div class="form-group col-lg-6">
                 <label class="col-lg-3 control-label">工号：</label>
                 <div class="col-lg-9">
-                    <input type="text" class="form-control" id="worker" name="worker" placeholder="请输入工号：">
+                    <input type="text" class="form-control" id="worker" name="worker" placeholder="请输入工号"
+                           style="font-size:10pt">
                 </div>
             </div>
             <div class="form-group col-lg-12">
                 <label>问题描述：</label>
-                <textarea class="form-control" rows="5" name="problem"></textarea>
+                <textarea class="form-control" rows="5" name="problem" style="font-size:10pt"></textarea>
             </div>
             <div class="form-group col-lg-12">
                 <label>处理方案：</label>
-                <textarea class="form-control" rows="5" name="solution"></textarea>
+                <textarea class="form-control" rows="5" name="solution" style="font-size:10pt"></textarea>
             </div>
             <div class="form-group col-lg-6">
-                <label class="col-lg-3 control-label">责任班组：</label>
+                <label class="col-lg-3 control-label" style="font-size:10pt">责任班组：</label>
                 <div class="col-lg-9">
-                    <select class="form-control" name="banzu">
+                    <select class="form-control" name="banzu" style="font-size:10pt">
                         <option>总二班</option>
                         <option>总三班</option>
                         <option>总四班</option>
@@ -59,37 +67,41 @@
                 </div>
             </div>
             <div class="form-group col-lg-6">
-                <label class="col-lg-3 control-label">负责调度：</label>
+                <label class="col-lg-3 control-label" style="font-size:10pt">负责调度：</label>
                 <div class="col-lg-9">
-                    <input type="text" class="form-control" placeholder="请输入负责调度人：" name="diaodu">
+                    <input type="text" class="form-control" placeholder="请输入负责调度人" name="diaodu" style="font-size:10pt">
                 </div>
             </div>
             <div class="form-group col-lg-6">
-                <label class="col-lg-3 control-label">来源：</label>
+                <label class="col-lg-3 control-label" style="font-size:10pt">来源：</label>
                 <div class="col-lg-9">
-                    <select class="form-control" name="laiyuan">
+                    <select class="form-control" name="laiyuan" style="font-size:10pt">
                         <option>厂验</option>
                         <option>内验</option>
                     </select>
                 </div>
             </div>
             <div class="form-group col-lg-6">
-                <label class="col-lg-3 control-label">验收人：</label>
+                <label class="col-lg-3 control-label" style="font-size:10pt">验收人：</label>
                 <div class="col-lg-9">
-                    <input type="text" class="form-control" placeholder="请输入验收人：" name="yanshouren">
+                    <input type="text" class="form-control" placeholder="请输入验收人" name="yanshouren"
+                           style="font-size:10pt">
                 </div>
             </div>
-            <div class="form-group col-lg-12">
+            <div class="form-group col-lg-12" style="font-size:10pt">
                 <label class="col-lg-2 control-label">完成情况：</label>
                 <div class="col-lg-10">
-                    <select class="form-control" name="wancheng">
+                    <select class="form-control" name="wancheng" style="font-size:10pt">
                         <option>已完成</option>
                         <option>未完成</option>
                     </select>
                 </div>
             </div>
+            '
             <div class="form-group" style="text-align: right">
-                <button type="submit" class="btn btn-outline-info">提交数据</button>
+                <button type="submit" class="btn btn-outline-info" onclick="return confirm('确定提交当前数据？')"
+                        style="font-size:10pt">提交数据
+                </button>
             </div>
         </form>
     </div>

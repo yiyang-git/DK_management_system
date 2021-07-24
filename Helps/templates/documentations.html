@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问题帮助</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
+        <h2 class="menu" style="font-size: 20px"><a href="/Helps/help_table/">数据知识管理问题</a></h2>
+        <p class="menu"><a href="/Helps/help_table/" style="font-size:9pt">问题总结</a></p>
+        <p class="menu"><a href="/Helps/add_help/" style="font-size:9pt">提出问题</a></p>
+        <h3 class="menu" style="font-size: 30px"><a href="/Helps/documentations/">工具使用帮助</a></h3>
+        <p class="menu"><a href="/Helps/documentations/" style="font-size:15pt">工具使用帮助文档</a></p>
+        <p class="menu"><a href="/Helps/suggest_table/" style="font-size:9pt">改进与建议</a></p>
+    </div>
+    <div class="col-lg-10">
+        <div class="page-header">
+            <h1 style="font-size: 40px">
+                数据知识管理工具帮助文档 <small>快速入手工具使用</small>
+            </h1>
+        </div>
+
+        <ul class="thumbnails">
+            <li class="col-lg-3">
+                <div class="thumbnail"><img width="300" height="200" src={{ picDict.requirement }}/>
+                    <div class="caption" contenteditable="true">
+                        <h1>需求数据</h1>
+
+                        <p style="font-size: small">来自多源异构的需求数据，整合为庞大的需求数据库。可以通过手动输入以及自动导入完成数据的新增。</p>
+
+                        <p><a class="btn btn-primary" href="#">浏览</a></p>
+                    </div>
+                </div>
+            </li>
+            <li class="col-lg-3">
+                <div class="thumbnail"><img width="300" height="200" src={{ picDict.manufacturing }}/>
+                    <div class="caption" contenteditable="true">
+                        <h1>制造数据</h1>
+
+                        <p style="font-size: small">
+                            由大量制造过程中产生的数据组成，其中包含验收数据与不合格单数据的详细情况，同时也归纳了大量制造外协问题有助于对未来制造过程的改进。</p>
+
+                        <p><a class="btn btn-primary" href="#">浏览</a>
+                    </div>
+                </div>
+            </li>
+            <li class="col-lg-3">
+                <div class="thumbnail"><img width="300" height="200" src={{ picDict.maintenance }}/>
+                    <div class="caption" contenteditable="true">
+                        <h1>运维数据</h1>
+
+                        <p style="font-size: small">包含设备使用过程中产生的日常运行及维护数据，同时记录了大量常规故障问题。</p>
+
+                        <p><a class="btn btn-primary" href="#">浏览</a>
+                    </div>
+                </div>
+            </li>
+            <li class="col-lg-3">
+                <div class="thumbnail"><img alt="300*200" src={{ picDict.experience }}/>
+                    <div class="caption" contenteditable="true">
+                        <h1>试验数据</h1>
+
+                        <p style="font-size: small">针对不同设备进行试验的数据及记录，有利于改进设备功能。</p>
+
+                        <p><a class="btn btn-primary" href="#">浏览</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+
+</div>
+<div class="col-lg-2" style="border-right-style: solid; border-right-width: 1px">
+
+</div>
+<div class="col-lg-10">
+    <ul class="thumbnails">
+        <li class="col-lg-3">
+            <div class="thumbnail"><img width="300" height="200" src={{ picDict.knowledge }}/>
+                <div class="caption" contenteditable="true">
+                    <h1>设计知识</h1>
+
+                    <p style="font-size: small">多源异构知识的整合管理，包括大量有关机械或设备设计的相关知识，并可以通过检索系统快速完成识别解锁。</p>
+
+                    <p><a class="btn btn-primary" href="#">浏览</a></p>
+                </div>
+            </div>
+        </li>
+        <li class="col-lg-3">
+            <div class="thumbnail"><img width="300" height="200" src={{ picDict.manufacturing }}/>
+                <div class="caption" contenteditable="true">
+                    <h1>制造数据</h1>
+
+                    <p style="font-size: small">由大量制造过程中产生的数据组成，其中包含验收数据与不合格单数据的详细情况，同时也归纳了大量制造外协问题有助于对未来制造过程的改进。</p>
+
+                    <p><a class="btn btn-primary" href="#">浏览</a>
+                </div>
+            </div>
+        </li>
+        <li class="col-lg-3">
+            <div class="thumbnail"><img width="300" height="200" src={{ picDict.maintenance }}/>
+                <div class="caption" contenteditable="true">
+                    <h1>运维数据</h1>
+
+                    <p style="font-size: small">包含设备使用过程中产生的日常运行及维护数据，同时记录了大量常规故障问题。</p>
+
+                    <p><a class="btn btn-primary" href="#">浏览</a>
+                </div>
+            </div>
+        </li>
+        <li class="col-lg-3">
+            <div class="thumbnail"><img alt="300*200" src={{ picDict.experience }}/>
+                <div class="caption" contenteditable="true">
+                    <h1>试验数据</h1>
+
+                    <p style="font-size: small">针对不同设备进行试验的数据及记录，有利于改进设备功能。</p>
+
+                    <p><a class="btn btn-primary" href="#">浏览</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+</div>
+
+</div>
+</body>
+</html>

@@ -9,12 +9,17 @@
 </head>
 <body>
 <div id="index_page"></div>
+{#在此处定义了一个div块，id叫index_page#}
 <h3>欢迎使用数据知识集成管理工具</h3>
 <div style="text-align: center">
     <img src="/static/img/data.png">
 </div>
 <script>
     $('#index_page').load('/static/html/index.html')
+    {#假如此元素内部的代码没有位于某个函数中，那么这些代码会在页面被加载时被立即执行。意义是：在id为index_page的元素里导入后面的结果#}
 </script>
 </body>
+{#<footer class="modal-footer">#}
+{#    footer#}
+{#</footer>#}
 </html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>试验数据记录</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .menu {
+            border-left-style: solid;
+            border-left-width: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <h1>试验数据封装与管理</h1>
+    <div class="col-lg-1" style="border-right-style: solid; border-right-width: 1px">
+        <h2 class="menu"><a href="/Experiment/test_table/">数据列表</a></h2>
+        <p class="menu"><a href="/Experiment/add_test/" style="font-size:9pt">新增数据</a></p>
+    </div>
+    <div class="col-lg-11">
+        <table class="table table-hover table-striped" style="font-size:8.5pt">
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>设备编号</th>
+                <th>试验负责人</th>
+                <th>试验详情</th>
+                <th>试验结论</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data_list %}
+                {% load ID_edit %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.equipment }}</td>
+                    <td>{{ item.charger }}</td>
+                    <td>{{ item.detail }}<a href="#" data-toggle="modal"
+                                            data-target={{ item.nid|ID_edit:"#myModal" }}><span
+                            class="glyphicon glyphicon-search"></span></a>
+                        <div class="modal fade" id={{ item.nid|ID_edit:"myModal" }} tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel">试验详情</h4>
+                                    </div>
+                                    <div class="modal-body" style="font-size:11pt">{{ item.detail }}</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                    </td>
+                    <td>{{ item.conclusion }}<a href="#" data-toggle="modal"
+                                                data-target={{ item.nid|ID_edit:"#myModal1" }}><span
+                            class="glyphicon glyphicon-search"></span></a>
+                        <div class="modal fade" id={{ item.nid|ID_edit:"myModal1" }} tabindex="-1" role="dialog"
+                             aria-labelledby="myModal1Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModal1Label">试验结论详情</h4>
+                                    </div>
+                                    <div class="modal-body" style="font-size:11pt">{{ item.conclusion }}</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal -->
+                        </div>
+                    </td>
+                    <td>
+                        {% load ID_edit %}
+                        <a href={{ item.nid|ID_edit:"/Experiment/edit_test?ID=" }}><span
+                                class="glyphicon glyphicon-edit"></span> 编辑</a> |
+                        <a href={{ item.nid|ID_edit:"/Experiment/delete_test?ID=" }}><span
+                                class="glyphicon glyphicon-trash"></span> 删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
