@@ -6,5 +6,6 @@ urlpatterns = [
     path('req_list/', views.req_list),
     path('edit_req/', views.edit_req),
     path('delete_req/', views.delete_req),
-    path('req_export/', views.req_export)
+    path('req_export/', views.req_export),
+    path('statistics_req/', views.statistics_req)
 ]

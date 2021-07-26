@@ -42,6 +42,12 @@ def receive_table(request):
         k = ManReceive.objects.all()[j]
         ID_old = k.ID
         ManReceive.objects.filter(id=ID_old).update(ID=i)
+    try:
+        page = int(request.GET.get('page'))
+        pageRange1, pageRange2 = (page - 1) * 11, (page - 1) * 11 + 10
+    except:
+        page = 1
+        pageRange1, pageRange2 = (page - 1) * 11, (page - 1) * 11 + 10
     datalist = ManReceive.objects.values(
         'ID',
         'date',
@@ -54,7 +60,7 @@ def receive_table(request):
         'yanshouren',
         'wancheng',
     )
-    return render(request, 'receive_table.html', {'data_list': datalist})
+    return render(request, 'receive_table.html', {'data_list': datalist[pageRange1:pageRange2]})
 
 
 def edit_receive(request):
@@ -133,6 +139,12 @@ def unqual_table(request):
         k = ManUnqual.objects.all()[j]
         ID_old = k.ID
         ManUnqual.objects.filter(id=ID_old).update(ID=i)
+    try:
+        page = int(request.GET.get('page'))
+        pageRange1, pageRange2 = (page - 1) * 11, (page - 1) * 11 + 10
+    except:
+        page = 1
+        pageRange1, pageRange2 = (page - 1) * 11, (page - 1) * 11 + 10
     datalist = ManUnqual.objects.values(
         'ID',
         'date',
@@ -148,7 +160,7 @@ def unqual_table(request):
         'result',
         'defect_text',
     )
-    return render(request, 'unqual_table.html', {'data_list': datalist})
+    return render(request, 'unqual_table.html', {'data_list': datalist[pageRange1:pageRange2]})
 
 
 def edit_unqual(request):
@@ -189,6 +201,12 @@ def outer_table(request):
         k = ManOuter.objects.all()[j]
         ID_old = k.nid
         ManOuter.objects.filter(nid=ID_old).update(nid=i)
+    try:
+        page = int(request.GET.get('page'))
+        pageRange1, pageRange2 = (page - 1) * 11, (page - 1) * 11 + 10
+    except:
+        page = 1
+        pageRange1, pageRange2 = (page - 1) * 11, (page - 1) * 11 + 10
     datalist = ManOuter.objects.values(
         'nid',
         'problem',
@@ -197,7 +215,7 @@ def outer_table(request):
         'completion',
         'note'
     )
-    return render(request, 'outer_table.html', {'data_list': datalist})
+    return render(request, 'outer_table.html', {'data_list': datalist[pageRange1:pageRange2]})
 
 
 def add_outer(request):

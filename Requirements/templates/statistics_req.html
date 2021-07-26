@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>需求数据管理</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <style>
+        body {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <h1>需求记录封装与管理</h1>
+    <div class="col-lg-1" style="border-right-style: solid; border-right-width: 3px">
+        <p class="menu"><a href="/Requirements/add_req/" style="font-size:9pt">数据列表</a></p>
+        <p class="menu"><a href="/Requirements/add_req/" style="font-size:9pt">新增数据</a></p>
+        <h2 class="menu"><a href="/Requirements/statistics_req/">数据统计</a></h2>
+        <p class="menu"><a href="/Requirements/req_export/" style="font-size:9pt">数据导出(等候约5秒)</a></p>
+
+    </div>
+    <div class="col-lg-11" data-spy="scroll" data-target=".navbar" data-offset="50">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-brand" style="font-size: 18px;width: 800px">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#section1">①需求数据来源统计</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#section2">②需求数据时间序列</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="section1" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
+            <div id="main" class="col-lg-5" style="width: 800px;height: 500px;"></div>
+            <script type="text/javascript">
+                var data1 = {{ customers_data|safe }};
+                var data2 = {{ product_data|safe }};
+                var chartDom = document.getElementById('main');
+                var myChart = echarts.init(chartDom);
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: "需求数据来源统计"
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b}: {c} ({d}%)'
+                    },
+                    legend: {
+                        top: "bottom"
+                    },
+                    series: [
+                        {
+                            name: '需求来源',
+                            type: 'pie',
+                            selectedMode: 'single',
+                            radius: [0, '40%'],
+                            label: {
+                                position: 'inner',
+                                fontSize: 14,
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            data: data1
+                        },
+                        {
+                            name: '需求来源',
+                            type: 'pie',
+                            radius: ['45%', '70%'],
+                            labelLine: {
+                                length: 20,
+                            },
+                            label: {
+                                formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                                backgroundColor: '#F6F8FC',
+                                borderColor: '#8C8D8E',
+                                borderWidth: 1,
+                                borderRadius: 4,
+
+                                rich: {
+                                    a: {
+                                        color: '#6E7079',
+                                        lineHeight: 22,
+                                        align: 'center'
+                                    },
+                                    hr: {
+                                        borderColor: '#8C8D8E',
+                                        width: '100%',
+                                        borderWidth: 1,
+                                        height: 0
+                                    },
+                                    b: {
+                                        color: '#4C5058',
+                                        fontSize: 14,
+                                        fontWeight: 'bold',
+                                        lineHeight: 33
+                                    },
+                                    per: {
+                                        color: '#fff',
+                                        backgroundColor: '#4C5058',
+                                        padding: [3, 4],
+                                        borderRadius: 4
+                                    }
+                                }
+                            },
+                            data: data2
+                        }
+                    ]
+                };
+                option && myChart.setOption(option);
+            </script>
+        </div>
+        <div id="section2" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
+            <div id="main2" class=col-lg-5" style="width: 800px;height: 500px;"></div>
+            <script type="text/javascript">
+                var data3 = {{ yearsNum|safe }};
+                var chartDom = document.getElementById('main2');
+                var myChart = echarts.init(chartDom);
+                var option2 = {
+                    title: {
+                        text: "需求数据时间序列数量"
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: data3,
+                        type: 'bar',
+                        showBackground: true,
+                        backgroundStyle: {
+                            color: 'rgba(180, 180, 180, 0.2)'
+                        }
+                    }]
+                };
+                option2 && myChart.setOption(option2);
+
+            </script>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>
