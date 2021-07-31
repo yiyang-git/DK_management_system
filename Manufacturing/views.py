@@ -11,6 +11,7 @@ def add_receive(request):
         ID = int(request.POST.get('ID'))
         date = request.POST.get('date')
         worker = request.POST.get('worker')
+        part = request.POST.get('part')
         problem = request.POST.get('problem')
         solution = request.POST.get('solution')
         banzu = request.POST.get('banzu')
@@ -23,6 +24,7 @@ def add_receive(request):
             ID=ID,
             date=date,
             worker=worker,
+            part=part,
             problem=problem,
             solution=solution,
             banzu=banzu,
@@ -52,6 +54,7 @@ def receive_table(request):
         'ID',
         'date',
         'worker',
+        'part',
         'problem',
         'solution',
         'banzu',
@@ -74,6 +77,7 @@ def edit_receive(request):
             ID=request.POST.get('ID'),
             date=request.POST.get('date'),
             worker=request.POST.get('worker'),
+            part=request.POST.get('part'),
             problem=request.POST.get('problem'),
             solution=request.POST.get('solution'),
             banzu=request.POST.get('banzu'),
@@ -209,6 +213,7 @@ def outer_table(request):
         pageRange1, pageRange2 = (page - 1) * 11, (page - 1) * 11 + 10
     datalist = ManOuter.objects.values(
         'nid',
+        'date',
         'problem',
         'institution',
         'charger',
@@ -224,6 +229,7 @@ def add_outer(request):
         return render(request, 'add_outer.html', {'ID_new': ID_count})
     else:
         nid = int(request.POST.get('ID'))
+        date = request.POST.get('date')
         problem = request.POST.get('problem')
         institution = request.POST.get('institution')
         charger = request.POST.get('charger')
@@ -233,6 +239,7 @@ def add_outer(request):
         record = ManOuter(
             ID=nid,
             nid=nid,
+            date=date,
             problem=problem,
             institution=institution,
             charger=charger,
@@ -252,6 +259,7 @@ def edit_outer(request):
     else:
         ManOuter.objects.filter(nid=ID).update(
             nid=request.POST.get('ID'),
+            date=request.POST.get('date'),
             problem=request.POST.get('problem'),
             institution=request.POST.get('institution'),
             charger=request.POST.get('charger'),

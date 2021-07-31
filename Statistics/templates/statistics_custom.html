@@ -1,0 +1,271 @@
+{% extends 'statistics_template.html' %}
+
+{% block content %}
+    <form class="col-lg-10" method="get" style="font-size: medium">
+        <div class="form-group col-lg-10">
+            <label class="col-lg-1 control-label">表1数据</label>
+            <div class="col-lg-1">
+                <select class="form-control" name="table0" style="font-size:9pt">
+                    <option>暂无</option>
+                    <option>需求数据-客户</option>
+                    <option>需求数据-产品类别</option>
+                    <option>需求数据-交货地点</option>
+                    <option>验收数据-验收问题部件</option>
+                    <option>验收数据-验收班组</option>
+                    <option>不合格单-不合格类型</option>
+                    <option>不合格单-处置方式</option>
+                    <option>外协问题-外部负责机构</option>
+                    <option>故障数据-故障负责人</option>
+                    <option>试验数据-负责人</option>
+                </select>
+            </div>
+            <label class="col-lg-1 control-label">表2数据</label>
+            <div class="col-lg-1">
+                <select class="form-control" name="table1" style="font-size:9pt">
+                    <option>暂无</option>
+                    <option>需求数据-客户</option>
+                    <option>需求数据-产品类别</option>
+                    <option>需求数据-交货地点</option>
+                    <option>验收数据-验收问题部件</option>
+                    <option>验收数据-验收班组</option>
+                    <option>不合格单-不合格类型</option>
+                    <option>不合格单-处置方式</option>
+                    <option>外协问题-外部负责机构</option>
+                    <option>故障数据-故障负责人</option>
+                    <option>试验数据-负责人</option>
+                </select>
+            </div>
+            <label class="col-lg-1 control-label">表3数据</label>
+            <div class="col-lg-1">
+                <select class="form-control" name="table2" style="font-size:9pt">
+                    <option>暂无</option>
+                    <option>需求数据-客户</option>
+                    <option>需求数据-产品类别</option>
+                    <option>需求数据-交货地点</option>
+                    <option>验收数据-验收问题部件</option>
+                    <option>验收数据-验收班组</option>
+                    <option>不合格单-不合格类型</option>
+                    <option>不合格单-处置方式</option>
+                    <option>外协问题-外部负责机构</option>
+                    <option>故障数据-故障负责人</option>
+                    <option>试验数据-负责人</option>
+                </select>
+            </div>
+            <label class="col-lg-1 control-label">表4数据</label>
+            <div class="col-lg-1">
+                <select class="form-control" name="table3" style="font-size:9pt">
+                    <option>暂无</option>
+                    <option>需求数据-客户</option>
+                    <option>需求数据-产品类别</option>
+                    <option>需求数据-交货地点</option>
+                    <option>验收数据-验收问题部件</option>
+                    <option>验收数据-验收班组</option>
+                    <option>不合格单-不合格类型</option>
+                    <option>不合格单-处置方式</option>
+                    <option>外协问题-外部负责机构</option>
+                    <option>故障数据-故障负责人</option>
+                    <option>试验数据-负责人</option>
+                </select>
+            </div>
+            <label class="col-lg-1 control-label">表5数据</label>
+            <div class="col-lg-1">
+                <select class="form-control" name="table4" style="font-size:9pt">
+                    <option>暂无</option>
+                    <option>需求数据-客户</option>
+                    <option>需求数据-产品类别</option>
+                    <option>需求数据-交货地点</option>
+                    <option>验收数据-验收问题部件</option>
+                    <option>验收数据-验收班组</option>
+                    <option>不合格单-不合格类型</option>
+                    <option>不合格单-处置方式</option>
+                    <option>外协问题-外部负责机构</option>
+                    <option>故障数据-故障负责人</option>
+                    <option>试验数据-负责人</option>
+                </select>
+            </div>
+            <label class="col-lg-1 control-label">表6数据</label>
+            <div class="col-lg-1">
+                <select class="form-control" name="table5" style="font-size:9pt">
+                    <option>暂无</option>
+                    <option>需求数据-客户</option>
+                    <option>需求数据-产品类别</option>
+                    <option>需求数据-交货地点</option>
+                    <option>验收数据-验收问题部件</option>
+                    <option>验收数据-验收班组</option>
+                    <option>不合格单-不合格类型</option>
+                    <option>不合格单-处置方式</option>
+                    <option>外协问题-外部负责机构</option>
+                    <option>故障数据-故障负责人</option>
+                    <option>试验数据-负责人</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-lg-5">
+            <label class="col-lg-4 control-label">起始时间：</label>
+            <div class="col-lg-6">
+                <input type="date" class="form-control" id="begin_date" name="begin_date" style="font-size:9pt"
+                       value={{ date.begin_date }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-5">
+            <label class="col-lg-4 control-label">终止时间：</label>
+            <div class="col-lg-6">
+                <input type="date" class="form-control" id="end_date" name="end_date" style="font-size:9pt"
+                       value={{ date.end_date }}>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-info" style="font-size:10pt">统计数据
+        </button>
+    </form>
+    <div>
+        <div class="col-lg-10">
+            <div>
+                <div id="main" style="display:inline-block;width: 1300px;height: 750px;"></div>
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('main');
+                    var myChart = echarts.init(chartDom);
+                    var subtexts = {{ subtexts|safe }};
+                    var dataList = {{ dataList|safe }};
+
+                    option = {
+                        title: [{
+                            text: '数据统计总图',
+                            left: 'center',
+                        }, {
+                            subtext: subtexts[0],
+                            left: '16.67%',
+                            top: '45%',
+                            textAlign: 'center'
+                        }, {
+                            subtext: subtexts[1],
+                            left: '16.67%',
+                            top: '75%',
+                            textAlign: 'center'
+                        }, {
+                            subtext: subtexts[2],
+                            left: '50%',
+                            top: '45%',
+                            textAlign: 'center'
+                        }, {
+                            subtext: subtexts[3],
+                            left: '50%',
+                            top: '75%',
+                            textAlign: 'center'
+                        }, {
+                            subtext: subtexts[4],
+                            left: '83.33%',
+                            top: '45%',
+                            textAlign: 'center'
+                        }, {
+                            subtext: subtexts[5],
+                            left: '83.33%',
+                            top: '75%',
+                            textAlign: 'center'
+                        }],
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        toolbox: {
+                            show: true,
+                            itemSize: 25,
+                            feature: {
+                                mark: {show: true},
+                                dataView: {show: true, readOnly: false},
+                                restore: {show: true},
+                                saveAsImage: {show: true}
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            radius: '25%',
+                            center: ['50%', '50%'],
+                            data: dataList[0],
+                            label: {
+                                position: 'outer',
+                                alignTo: 'none',
+                                bleedMargin: 5
+                            },
+                            left: 0,
+                            right: '66.6667%',
+                            top: '-43.3333%',
+                            bottom: 0
+                        }, {
+                            type: 'pie',
+                            radius: '25%',
+                            center: ['50%', '50%'],
+                            data: dataList[1],
+                            label: {
+                                position: 'outer',
+                                alignTo: 'labelLine',
+                                bleedMargin: 5
+                            },
+                            left: 0,
+                            right: '66.6667%',
+                            top: '23.3333%',
+                            bottom: 0
+                        }, {
+                            type: 'pie',
+                            radius: '25%',
+                            center: ['50%', '50%'],
+                            data: dataList[2],
+                            label: {
+                                position: 'outer',
+                                alignTo: 'edge',
+                                margin: 20
+                            },
+                            left: '33.3333%',
+                            right: '33.3333%',
+                            top: '-43.3333%',
+                            bottom: 0
+                        }, {
+                            type: 'pie',
+                            radius: '25%',
+                            center: ['50%', '50%'],
+                            data: dataList[3],
+                            label: {
+                                position: 'outer',
+                                alignTo: 'edge',
+                                margin: 20
+                            },
+                            left: '33.3333%',
+                            right: '33.3333%',
+                            top: '23.3333%',
+                            bottom: 0
+                        }, {
+                            type: 'pie',
+                            radius: '25%',
+                            center: ['50%', '50%'],
+                            data: dataList[4],
+                            label: {
+                                position: 'outer',
+                                alignTo: 'edge',
+                                margin: 20
+                            },
+                            left: '66.6667%',
+                            right: 0,
+                            top: '-43.3333%',
+                            bottom: 0
+                        }, {
+                            type: 'pie',
+                            radius: '25%',
+                            center: ['50%', '50%'],
+                            data: dataList[5],
+                            label: {
+                                position: 'outer',
+                                alignTo: 'edge',
+                                margin: 20
+                            },
+                            left: '66.6667%',
+                            right: 0,
+                            top: '23.3333%',
+                            bottom: 0
+                        },]
+                    };
+                    option && myChart.setOption(option);
+                </script>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

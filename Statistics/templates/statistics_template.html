@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据统计</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script type="text/javascript" src="static/js/shine.js"></script>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <h1>数据统计</h1>
+    <div class="col-lg-1" style="border-right-style: solid; border-right-width: 3px">
+        <p class="menu"><a href="/Statistics/statistics_req/" style="font-size:12pt">需求数据统计</a></p>
+        <p class="menu"><a href="/Statistics/statistics_man/" style="font-size:12pt">制造数据统计</a></p>
+        <p class="menu"><a href="/Statistics/statistics_mtn/" style="font-size:12pt">运维数据统计</a></p>
+        <p class="menu"><a href="/Statistics/statistics_exp/" style="font-size:12pt">试验数据统计</a></p>
+        <p class="menu"><a href="/Statistics/statistics_custom/" style="font-size:12pt">生成自定义统计图</a></p>
+    </div>
+    <div class="container-fluid">
+        {% block content %}
+            “此处是要展示的数据统计信息”
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

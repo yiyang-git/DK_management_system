@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'Requirements',
     'Maintenance',
     'Experiment',
-    'Helps'
+    'Helps',
+    'Statistics',
+    'Search'
 ]
 
 MIDDLEWARE = [
