@@ -1,0 +1,130 @@
+/*重置样式*/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*主体 样 式*/
+
+
+/*通用样式*/
+.container{
+    margin: 0 auto;
+    max-width: 1100px;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.toll-primary{
+    color: #111111;
+}
+
+.bg-1{
+    background: white;
+    color: #111111;
+}
+
+.bg-2{
+    background: #666666;
+    color: #111111;
+}
+
+.bg-3{
+    background: #dddddd;
+    color: #111111;
+}
+
+
+/*导航栏 nav*/
+#nav-menu-container{
+    background: #666666;
+    overflow: auto;
+}
+
+#nav-menu-container h1{
+    float: left;
+    padding-top: 20px;
+}
+
+#nav-menu-container ul{
+    float: right;
+    list-style: none;
+}
+
+/*showcase*/
+#showcase{
+    background: url("../img/铁建重工1.jpg") no-repeat center center/cover;
+    height: 500px;
+}
+
+#showcase .showcase-content{
+    color: #ffffff;
+    text-align: center;
+    padding-top: 80px;
+}
+
+#showcase .showcase-content h1{
+    font-size: 50px;
+    line-height: 1.2em;
+}
+
+.btn{
+    display: inline-block;
+    font-size: 18px;
+    color: #ffffff;
+    background:#111111;
+    padding: 13px 28px;
+}
+.btn:hover{
+    background: cadetblue;
+}
+/* home-info*/
+#home-info{
+    height: 400px;
+}
+
+#home-info .info-img{
+    float: left;
+    width: 50%;
+    background: url("../img/铁建重工2.jpg") ;
+    background-size: cover;
+    height: 100%;
+
+
+}
+#home-info .info-content{
+    float: right;
+    width: 50%;
+    text-align: center;
+    height: 100%;
+    padding: 50px 30px;
+    overflow: hidden;
+}
+
+#home-info .info-content p{
+    padding-bottom: 30px;
+}
+
+/*features*/
+#features{
+    overflow: hidden;
+}
+
+.box{
+    float: left;
+    width: 25%;
+    padding: 50px;
+    text-align: center;
+    padding-bottom: 1000px;
+    margin-bottom: -1000px;
+}
+
+.box i{
+    margin-bottom: 10px;
+}
+
+.box h3{
+    font-size: 20PX;
+    font-weight:bold;
+}
