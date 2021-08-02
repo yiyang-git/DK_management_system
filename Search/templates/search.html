@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据查询</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+</head>
+<body>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <div class="col-lg-12 center-block">
+        <h1>模糊查询</h1>
+        <form action="/Search/search/" method="post" style="font-size:12pt">
+            <div class="form-group col-lg-4">
+                <label class="col-lg-4 control-label">查询关键词：</label>
+                <div class="col-lg-7">
+                    <input type="text" class="form-control" id="key_word" name="key_word" style="font-size:10pt"
+                           placeholder="请输入查询关键词">
+                </div>
+            </div>
+            <div class="form-group col-lg-2" style="text-align: left">
+                <button type="submit" class="btn btn-outline-info"
+                        style="font-size:12pt">模糊查询
+                </button>
+            </div>
+            <div class="form-group col-lg-6" style="text-align: right">
+            </div>
+        </form>
+
+    </div>
+</div>
+<div class="col-lg-12 center-block">
+    <h1>高级查询(与模糊查询不兼容)</h1>
+    <form action="/Search/search/" method="post" style="font-size:12pt">
+        <div class="form-group col-lg-12">
+            <div class="form-group col-lg-4">
+                <label class="col-lg-5 control-label">包含以下全部关键词：（逗号分割）</label>
+                <div class="col-lg-7">
+                    <input type="text" class="form-control" id="key_word_all" name="key_word_all" style="font-size:10pt"
+                           placeholder="请输入关键词">
+                </div>
+            </div>
+            <div class="form-group col-lg-4">
+                <label class="col-lg-5 control-label">包含以下任一关键词：（逗号分割）</label>
+                <div class="col-lg-7">
+                    <input type="text" class="form-control" id="key_word_any" name="key_word_any" style="font-size:10pt"
+                           placeholder="请输入关键词">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-12">
+            <div class="form-group col-md-4">
+                <label class="col-lg-3 control-label">数据类别：</label>
+                <div class="col-lg-9">
+                    <label class="checkbox-inline"><input type="checkbox" name="req" value="1">需求数据</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="man" value="1">制造数据</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="mtn" value="1">运维数据</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="exp" value="1">试验数据</label>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="col-lg-5 control-label">查询时限：</label>
+                <div class="col-lg-6">
+                    <select class="form-control" name="date" style="font-size:9pt">
+                        <option>全部数据</option>
+                        <option>本周内</option>
+                        <option>本月内</option>
+                        <option>本年内</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="col-lg-5 control-label">负责人：</label>
+                <div class="col-lg-6">
+                    <input type="text" class="form-control" id="charger" name="charger" style="font-size:9pt"
+                           placeholder="请输入负责人">
+                </div>
+            </div>
+            <div class="form-group col-lg-2" style="text-align: left">
+                <button type="submit" class="btn btn-outline-info"
+                        style="font-size:12pt">高级查询
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+{#        需求表格#}
+<div class="col-lg-12" style="font-size:9pt">
+    <h3>查询结果</h3>
+    <table class="table table-hover table-striped">
+        <tbody>
+
+        {% for item in data_list.req %}
+            <tr>
+                <td width="65px">需求数据</td>
+                {% for i in item.values %}
+                    <td>{{ i }}</td>
+                {% endfor %}
+                {% load ID_edit %}
+                <td width="65px"><a href={{ item.ID|ID_edit:"/Requirements/edit_req?ID=" }}><span
+                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
+            </tr>
+        {% endfor %}
+        {% for item in data_list.rec %}
+            <tr>
+                <td width="65px">验收数据</td>
+                {% for i in item.values %}
+                    <td>{{ i }}</td>
+                {% endfor %}
+                {% load ID_edit %}
+                <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_recive?ID=" }}><span
+                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
+            </tr>
+        {% endfor %}
+        {% for item in data_list.unq %}
+            <tr>
+                <td width="65px">不合格单</td>
+                {% for i in item.values %}
+                    <td>{{ i }}</td>
+                {% endfor %}
+                {% load ID_edit %}
+                <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_unqual?ID=" }}><span
+                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
+            </tr>
+        {% endfor %}
+        {% for item in data_list.out %}
+            <tr>
+                <td width="65px">外协问题</td>
+                {% for i in item.values %}
+                    <td>{{ i }}</td>
+                {% endfor %}
+                {% load ID_edit %}
+                <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_outer?ID=" }}><span
+                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
+            </tr>
+        {% endfor %}
+        {% for item in data_list.run %}
+            <tr>
+                <td width="65px">运维数据</td>
+                {% for i in item.values %}
+                    <td>{{ i }}</td>
+                {% endfor %}
+                {% load ID_edit %}
+                <td><a href={{ item.ID|ID_edit:"/Maintenance/edit_runrecord?ID=" }}><span
+                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
+            </tr>
+        {% endfor %}
+        {% for item in data_list.fault %}
+            <tr>
+                <td width="65px">故障数据</td>
+                {% for i in item.values %}
+                    <td>{{ i }}</td>
+                {% endfor %}
+                {% load ID_edit %}
+                <td><a href={{ item.ID|ID_edit:"/Maintenance/edit_fault?ID=" }}><span
+                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
+            </tr>
+        {% endfor %}
+        {% for item in data_list.exp %}
+            <tr>
+                <td width="65px">试验数据</td>
+                {% for i in item.values %}
+                    <td>{{ i }}</td>
+                {% endfor %}
+                {% load ID_edit %}
+                <td><a href={{ item.ID|ID_edit:"/Experiment/edit_test?ID=" }}><span
+                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

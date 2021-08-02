@@ -6,6 +6,7 @@ class ManReceive(models.Model):
     ID = models.IntegerField()
     date = models.CharField(max_length=16, null=True)
     worker = models.CharField(max_length=16, null=True)
+    part = models.CharField(max_length=16, null=True)
     problem = models.TextField(null=True, default='')
     solution = models.TextField(null=True, default='')
     banzu = models.CharField(max_length=16, null=True)
@@ -34,6 +35,7 @@ class ManUnqual(models.Model):
 class ManOuter(models.Model):
     ID = models.IntegerField(null=True)
     nid = models.IntegerField()
+    date = models.CharField(max_length=16, null=True)
     problem = models.TextField(null=True, default='')
     institution = models.CharField(max_length=16, null=True)
     charger = models.CharField(max_length=16, null=True)

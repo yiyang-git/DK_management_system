@@ -17,14 +17,12 @@
     <div class="col-lg-1" style="border-right-style: solid; border-right-width: 3px">
         <h2 class="menu"><a href="/Requirements/req_list/">数据列表</a></h2>
         <p class="menu"><a href="/Requirements/add_req/" style="font-size:9pt">新增数据</a></p>
-        <p class="menu"><a href="/Requirements/statistics_req/" style="font-size:9pt">数据统计</a></p>
         <p class="menu"><a href="/Requirements/req_export/" style="font-size:9pt">数据导出(等候约5秒)</a></p>
     </div>
     <div class="col-lg-11">
         <table class="table table-hover table-striped" style="font-size:9pt">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>客户</th>
                 <th>产品类别</th>
                 <th>设备编号</th>
@@ -42,7 +40,6 @@
             {% for item in data_list %}
                 {% load ID_edit %}
                 <tr>
-                    <td>{{ item.ID }}</td>
                     <td>{{ item.customer }}</td>
                     <td>{{ item.product_type }}</td>
                     <td>{{ item.product_code }}</td>

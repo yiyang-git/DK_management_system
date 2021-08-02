@@ -45,28 +45,33 @@
         <div id="logo" class="pull-left">
             <h1><a href="/home/" class="scrollto">数据知识集成管理工具</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
-            {#        <a href="#intro"><img src="/static/img/logo.png" alt="" title="" /></a>#}
+            <!--      <a href="#intro"><img src="/static/img/logo.png" alt="" title="" /></a>-->
         </div>
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
                 <li class="menu"><a href="/home/">首页</a></li>
-                <li><a href="/Requirements/req_list/">需求数据</a></li>
-
-                <li><a href="#">制造数据</a>
+                <li><a href="#">数据管理</a>
                     <ul>
-                        <li><a href="/Manufacturing/receive_table/">验收数据</a></li>
-                        <li><a href="/Manufacturing/unqual_table/">不合格单</a></li>
-                        <li><a href="/Manufacturing/outer_table/">外协问题</a></li>
+                        <li><a href="/Requirements/req_list/">需求数据</a></li>
+                        <li><a href="#">制造数据</a>
+                            <ul>
+                                <li><a href="/Manufacturing/receive_table/">验收数据</a></li>
+                                <li><a href="/Manufacturing/unqual_table/">不合格单</a></li>
+                                <li><a href="/Manufacturing/outer_table/">外协问题</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">运维数据</a>
+                            <ul>
+                                <li><a href="/Maintenance/runRecord_table/">运行时序数据</a></li>
+                                <li><a href="/Maintenance/fault_table/">故障记录</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/Experiment/test_table">试验数据</a></li>
                     </ul>
                 </li>
-                <li><a href="#">运维数据</a>
-                    <ul>
-                        <li><a href="/Maintenance/runRecord_table/">运行时序数据</a></li>
-                        <li><a href="/Maintenance/fault_table/">故障记录</a></li>
-                    </ul>
-                </li>
-                <li><a href="/Experiment/test_table">试验数据</a></li>
+                <li><a href="/Statistics/statistics_req">数据统计</a></li>
+                <li><a href="/Search/search">查询数据</a></li>
                 <li><a href="/Helps/help_table">问题帮助</a></li>
             </ul>
         </nav><!-- #nav-menu-container -->

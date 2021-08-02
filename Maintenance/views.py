@@ -42,6 +42,7 @@ def runRecord_table(request):
         k = RunRecord.objects.all()[j]
         ID_old = k.nid
         RunRecord.objects.filter(nid=ID_old).update(nid=i)
+        RunRecord.objects.filter(nid=ID_old).update(id=i)
     datalist = RunRecord.objects.values(
         'nid',
         'date',

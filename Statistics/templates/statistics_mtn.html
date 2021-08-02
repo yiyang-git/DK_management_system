@@ -1,0 +1,255 @@
+{% extends 'statistics_template.html' %}
+
+{% block content %}
+    <form class="col-lg-10" method="get" style="font-size: medium">
+        <div class="form-group col-lg-10">
+            <label class="col-lg-4 control-label">运营维护记录统计年：</label>
+            <div class="col-lg-5">
+                <input type="date" class="form-control" id="record_year" name="record_year" style="font-size:9pt"
+                       value={{ record_year }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-5">
+            <label class="col-lg-4 control-label">故障统计起始时间：</label>
+            <div class="col-lg-6">
+                <input type="date" class="form-control" id="begin_date" name="begin_date" style="font-size:9pt"
+                       value={{ date.begin_date }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-5">
+            <label class="col-lg-4 control-label">故障统计终止时间：</label>
+            <div class="col-lg-6">
+                <input type="date" class="form-control" id="end_date" name="end_date" style="font-size:9pt"
+                       value={{ date.end_date }}>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-info" style="font-size:10pt">统计数据
+        </button>
+    </form>
+    <div>
+        <div class="col-lg-10">
+            <div id="record" style="width: 1200px;height: 300px;"></div>
+            <script type="text/javascript">
+                var data_runrecord =
+                {{ data_runrecord|safe }}
+                var record_year_title = {{ record_year_title|safe }};
+                var chartDom = document.getElementById('record');
+                var myChart = echarts.init(chartDom);
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        top: 30,
+                        left: 'center',
+                        text: record_year_title + "运维记录",
+                        subtext: '绿色：运行正常   黄色：故障   红色：停止工作',
+                    },
+                    tooltip: {},
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    visualMap: {
+                        show: false,
+                        min: 0,
+                        max: 2,
+                        type: 'piecewise',
+                        orient: 'horizontal',
+                        left: 'center',
+                        color: 'green',
+                        top: 65,
+                        inRange: {
+                            color: ['Red', 'Yellow', 'Green']
+                        }
+                    },
+                    calendar: {
+                        top: 120,
+                        left: 30,
+                        right: 30,
+                        cellSize: ['auto', 15],
+                        range: record_year_title,
+                        itemStyle: {
+                            borderWidth: 1
+                        },
+                        yearLabel: {show: false}
+                    },
+                    series: {
+                        type: 'heatmap',
+                        coordinateSystem: 'calendar',
+                        data: data_runrecord
+                    }
+                };
+                option && myChart.setOption(option);
+            </script>
+            <div>
+                <div id="charger" style="display:inline-block;width: 600px;height: 200px;"></div>
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('charger');
+                    var myChart = echarts.init(chartDom);
+                    var data1 = {{ charger_data|safe }}
+                        option = {
+                            title: {
+                                text: '故障发生负责人统计',
+                                subtext: '数据统计',
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item'
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    mark: {show: true},
+                                    dataView: {show: true, readOnly: false},
+                                    restore: {show: true},
+                                    saveAsImage: {show: true}
+                                }
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                            },
+                            series: [
+                                {
+                                    name: '负责人',
+                                    type: 'pie',
+                                    radius: '45%',
+                                    data: data1,
+                                    emphasis: {
+                                        itemStyle: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+                    option && myChart.setOption(option);
+                </script>
+
+                <div id="risk" style="display:inline-block;width: 600px;height: 200px;"></div>
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('risk');
+                    var myChart = echarts.init(chartDom);
+                    var data2 = {{ risk_data|safe }}
+                        option2 = {
+                            title: {
+                                text: '故障危险等级统计',
+                                subtext: '数据统计',
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item'
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    mark: {show: true},
+                                    dataView: {show: true, readOnly: false},
+                                    restore: {show: true},
+                                    saveAsImage: {show: true}
+                                }
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                            },
+                            series: [
+                                {
+                                    name: '危险等级',
+                                    type: 'pie',
+                                    radius: '45%',
+                                    data: data2,
+                                    emphasis: {
+                                        itemStyle: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(255, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+                    option2 && myChart.setOption(option2);
+                </script>
+            </div>
+            <div id="com" style="width: 1200px;height: 250px;"></div>
+            <script type="text/javascript">
+                var chartDom = document.getElementById('com');
+                var myChart = echarts.init(chartDom);
+                var data3 =
+                {{ num_done|safe }}
+                var data4 = {{ num_not|safe }}
+                    option3 = {
+                        title: {
+                            text: '故障解决情况'
+
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
+                            }
+                        },
+                        legend: {
+                            data: ['未解决', '已解决']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '3%',
+                            bottom: '40%',
+                            containLabel: true
+                        },
+                        xAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'category',
+                                axisTick: {
+                                    show: true
+                                },
+                                data: ['完成情况']
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '已完成',
+                                type: 'bar',
+                                stack: '总量',
+                                label: {
+                                    show: true
+                                },
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [data3]
+                            },
+                            {
+                                name: '未完成',
+                                type: 'bar',
+                                stack: '总量',
+                                label: {
+                                    show: true,
+                                    position: 'left'
+                                },
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [data4]
+                            }
+                        ]
+                    };
+                option3 && myChart.setOption(option3);
+            </script>
+        </div>
+    </div>
+{% endblock %}

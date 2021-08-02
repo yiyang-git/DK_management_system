@@ -30,6 +30,7 @@
             <tr>
                 <th>日期</th>
                 <th>工号</th>
+                <th>问题部件</th>
                 <th>问题描述</th>
                 <th>处理方案</th>
                 <th>责任班组</th>
@@ -47,6 +48,7 @@
 
                     <td>{{ item.date }}</td>
                     <td>{{ item.worker }}</td>
+                    <td>{{ item.part }}</td>
                     <td width="250px">{{ item.problem }}</td>
                     <td width="250px">{{ item.solution }}</td>
                     <td>{{ item.banzu }}</td>

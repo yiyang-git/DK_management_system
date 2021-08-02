@@ -1,0 +1,112 @@
+{% extends 'statistics_template.html' %}
+
+{% block content %}
+    <form class="col-lg-10" method="get" style="font-size: medium">
+        <div class="form-group col-lg-5">
+            <label class="col-lg-4 control-label">故障统计起始时间：</label>
+            <div class="col-lg-6">
+                <input type="date" class="form-control" id="begin_date" name="begin_date" style="font-size:9pt"
+                       value={{ date.begin_date }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-5">
+            <label class="col-lg-4 control-label">故障统计终止时间：</label>
+            <div class="col-lg-6">
+                <input type="date" class="form-control" id="end_date" name="end_date" style="font-size:9pt"
+                       value={{ date.end_date }}>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-info" style="font-size:10pt">统计数据
+        </button>
+    </form>
+    <div>
+        <div class="col-lg-10">
+            <div>
+                <div id="charger" style="display:inline-block;width: 600px;height: 300px;"></div>
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('charger');
+                    var myChart = echarts.init(chartDom);
+                    var data1 = {{ charger_data|safe }}
+                        option = {
+                            title: {
+                                text: '试验负责人统计',
+                                subtext: '数据统计',
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item'
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    mark: {show: true},
+                                    dataView: {show: true, readOnly: false},
+                                    restore: {show: true},
+                                    saveAsImage: {show: true}
+                                }
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                            },
+                            series: [
+                                {
+                                    name: '负责人',
+                                    type: 'pie',
+                                    radius: '45%',
+                                    data: data1,
+                                    emphasis: {
+                                        itemStyle: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+                    option && myChart.setOption(option);
+                </script>
+
+                <div id="years" style="display:inline-block;width: 600px;height: 300px;"></div>
+                <script type="text/javascript">
+                    var data3 = {{ yearsNum|safe }};
+                    var chartDom = document.getElementById('years');
+                    var myChart = echarts.init(chartDom);
+                    var option2 = {
+                        title: {
+                            text: "试验数据时间序列数量"
+                        },
+                        toolbox: {
+                            show: true,
+                            feature: {
+                                mark: {show: true},
+                                dataView: {show: true, readOnly: false},
+                                restore: {show: true},
+                                saveAsImage: {show: true}
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: data3,
+                            type: 'bar',
+                            showBackground: true,
+                            backgroundStyle: {
+                                color: 'rgba(180, 180, 180, 0.2)'
+                            }
+                        }]
+                    };
+                    option2 && myChart.setOption(option2);
+                </script>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

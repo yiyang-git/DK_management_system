@@ -1,48 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>需求数据管理</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-    <style>
-        body {
-            position: relative;
-        }
-    </style>
-</head>
-<body>
-<div id="index_page"></div>
-<script>
-    $('#index_page').load('/static/html/index.html')
-</script>
-<div class="container-fluid">
-    <h1>需求记录封装与管理</h1>
-    <div class="col-lg-1" style="border-right-style: solid; border-right-width: 3px">
-        <p class="menu"><a href="/Requirements/add_req/" style="font-size:9pt">数据列表</a></p>
-        <p class="menu"><a href="/Requirements/add_req/" style="font-size:9pt">新增数据</a></p>
-        <h2 class="menu"><a href="/Requirements/statistics_req/">数据统计</a></h2>
-        <p class="menu"><a href="/Requirements/req_export/" style="font-size:9pt">数据导出(等候约5秒)</a></p>
+{% extends 'statistics_template.html' %}
 
-    </div>
-    <div class="col-lg-11" data-spy="scroll" data-target=".navbar" data-offset="50">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-brand" style="font-size: 18px;width: 800px">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#section1">①需求数据来源统计</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#section2">②需求数据时间序列</a>
-                </li>
-            </ul>
-        </nav>
-
-        <div id="section1" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
-            <div id="main" class="col-lg-5" style="width: 800px;height: 500px;"></div>
+{% block content %}
+    <form class="col-lg-10" method="get" style="font-size: medium">
+        <div class="form-group col-lg-4">
+            <label class="col-lg-4 control-label">起始时间：</label>
+            <div class="col-lg-6">
+                <input type="date" class="form-control" id="begin_date" name="begin_date" style="font-size:9pt"
+                       value={{ date.begin_date }}>
+            </div>
+        </div>
+        <div class="form-group col-lg-4">
+            <label class="col-lg-4 control-label">终止时间：</label>
+            <div class="col-lg-6">
+                <input type="date" class="form-control" id="end_date" name="end_date" style="font-size:9pt"
+                       value={{ date.end_date }}>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-info" style="font-size:10pt">统计数据
+        </button>
+    </form>
+    <div>
+        <div class="col-lg-6">
+            <div id="main" style="width: 800px;height: 500px;"></div>
             <script type="text/javascript">
                 var data1 = {{ customers_data|safe }};
                 var data2 = {{ product_data|safe }};
@@ -130,9 +109,10 @@
                 };
                 option && myChart.setOption(option);
             </script>
+
         </div>
-        <div id="section2" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
-            <div id="main2" class=col-lg-5" style="width: 800px;height: 500px;"></div>
+        <div class="col-lg-5">
+            <div id="main2" style="width: 650px;height: 500px;"></div>
             <script type="text/javascript">
                 var data3 = {{ yearsNum|safe }};
                 var chartDom = document.getElementById('main2');
@@ -170,9 +150,8 @@
 
             </script>
         </div>
-
-
     </div>
-</div>
-</body>
-</html>
+{% endblock %}
+
+
+

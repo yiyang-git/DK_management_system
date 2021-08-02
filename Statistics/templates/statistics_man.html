@@ -1,0 +1,509 @@
+{% extends 'statistics_template.html' %}
+
+{% block content %}
+    <div class="panel-group col-lg-11" id="accordion">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseOne">
+                        验收数据统计
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div>
+                    <form method="get" style="font-size: medium">
+                        <div class="form-group col-lg-4">
+                            <label class="col-lg-4 control-label">起始时间：</label>
+                            <div class="col-lg-6">
+                                <input type="date" class="form-control" id="begin_date" name="begin_date"
+                                       style="font-size:9pt" value={{ date.begin_date }}>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label class="col-lg-4 control-label">终止时间：</label>
+                            <div class="col-lg-6">
+                                <input type="date" class="form-control" id="end_date" name="end_date"
+                                       style="font-size:9pt" value={{ date.end_date }}>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-info" style="font-size:10pt">统计数据
+                        </button>
+                    </form>
+                    <div id="part" style="display:inline-block;width: 700px;height: 300px;"></div>
+                    <script type="text/javascript">
+                        var chartDom = document.getElementById('part');
+                        var myChart = echarts.init(chartDom, 'shine');
+                        var data1 = {{ part_data|safe }}
+                            option = {
+                                title: {
+                                    text: '验收问题部件',
+                                    subtext: '数据统计',
+                                    left: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'item'
+                                },
+                                toolbox: {
+                                    show: true,
+                                    feature: {
+                                        mark: {show: true},
+                                        dataView: {show: true, readOnly: false},
+                                        restore: {show: true},
+                                        saveAsImage: {show: true}
+                                    }
+                                },
+                                legend: {
+                                    orient: 'vertical',
+                                    left: 'left',
+                                },
+                                series: [
+                                    {
+                                        name: '问题部件',
+                                        type: 'pie',
+                                        radius: '45%',
+                                        data: data1,
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+                        option && myChart.setOption(option);
+                    </script>
+
+                    <div id="team" style="display:inline-block;width: 600px;height: 300px;"></div>
+                    <script type="text/javascript">
+                        var chartDom = document.getElementById('team');
+                        var myChart = echarts.init(chartDom, 'shine');
+                        var data2 = {{ team_data|safe }}
+                            option2 = {
+                                title: {
+                                    text: '班组工作量',
+                                    subtext: '数据统计',
+                                    left: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'item'
+                                },
+                                toolbox: {
+                                    show: true,
+                                    feature: {
+                                        mark: {show: true},
+                                        dataView: {show: true, readOnly: false},
+                                        restore: {show: true},
+                                        saveAsImage: {show: true}
+                                    }
+                                },
+                                legend: {
+                                    orient: 'vertical',
+                                    left: 'left',
+                                },
+                                series: [
+                                    {
+                                        name: '班组统计',
+                                        type: 'pie',
+                                        radius: '45%',
+                                        data: data2,
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+                        option2 && myChart.setOption(option2);
+                    </script>
+                </div>
+                <div id="com" style="width: 1300px;height: 250px;"></div>
+                <script type="text/javascript">
+                    var chartDom = document.getElementById('com');
+                    var myChart = echarts.init(chartDom);
+                    var data3 =
+                    {{ num_done|safe }}
+                    var data4 = {{ num_not|safe }}
+                        option3 = {
+                            title: {
+                                text: '验收单完成情况'
+
+                            },
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                    type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
+                                }
+                            },
+                            legend: {
+                                data: ['未完成', '已完成']
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '3%',
+                                bottom: '40%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'value'
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'category',
+                                    axisTick: {
+                                        show: true
+                                    },
+                                    data: ['完成情况']
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '已完成',
+                                    type: 'bar',
+                                    stack: '总量',
+                                    label: {
+                                        show: true
+                                    },
+                                    emphasis: {
+                                        focus: 'series'
+                                    },
+                                    data: [data3]
+                                },
+                                {
+                                    name: '未完成',
+                                    type: 'bar',
+                                    stack: '总量',
+                                    label: {
+                                        show: true,
+                                        position: 'left'
+                                    },
+                                    emphasis: {
+                                        focus: 'series'
+                                    },
+                                    data: [data4]
+                                }
+                            ]
+                        };
+                    option3 && myChart.setOption(option3);
+                </script>
+                <h1>验收单未完成具体情况：</h1>
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>工号</th>
+                        <th>问题部件</th>
+                        <th>问题描述</th>
+                        <th>处理方案</th>
+                        <th>责任班组</th>
+                        <th>负责调度</th>
+                        <th>来源</th>
+                        <th>验收人</th>
+                        <th>完成情况</th>
+                        <th>操作</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in data_list %}
+                        <tr>
+
+                            <td>{{ item.date }}</td>
+                            <td>{{ item.worker }}</td>
+                            <td>{{ item.part }}</td>
+                            <td width="250px">{{ item.problem }}</td>
+                            <td width="250px">{{ item.solution }}</td>
+                            <td>{{ item.banzu }}</td>
+                            <td>{{ item.diaodu }}</td>
+                            <td>{{ item.laiyuan }}</td>
+                            <td>{{ item.yanshouren }}</td>
+                            <td>{{ item.wancheng }}</td>
+                            <td>
+                                {% load ID_edit %}
+                                <a href={{ item.ID|ID_edit:"/Manufacturing/edit_receive?ID=" }}><span
+                                        class="glyphicon glyphicon-edit"></span> 编辑</a>|
+                                <a href={{ item.ID|ID_edit:"/Manufacturing/delete_receive?ID=" }}><span
+                                        class="glyphicon glyphicon-trash"></span> 删除</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseTwo">
+                        不合格单数据统计
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div>
+                    <form method="get" style="font-size: medium">
+                        <div class="form-group col-lg-4">
+                            <label class="col-lg-4 control-label">起始时间：</label>
+                            <div class="col-lg-6">
+                                <input type="date" class="form-control" id="begin_date2" name="begin_date2"
+                                       style="font-size:9pt" value={{ date2.begin_date2 }}>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label class="col-lg-4 control-label">终止时间：</label>
+                            <div class="col-lg-6">
+                                <input type="date" class="form-control" id="end_date2" name="end_date2"
+                                       style="font-size:9pt" value={{ date2.end_date2 }}>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-info" style="font-size:10pt">统计数据
+                        </button>
+                    </form>
+                    <div id="unq" style="width: 1200px;height: 600px;"></div>
+                    <script type="text/javascript">
+                        var chartDom = document.getElementById('unq');
+                        var myChart = echarts.init(chartDom);
+                        var year_data =
+                        {{ yearsNum|safe }}
+                        var fontColor = 'black';
+                        var piedata1 =
+                        {{ type_data|safe }}
+                        var piedata2 = {{ handle_data|safe }}
+
+                            option4 = {
+                                backgroundColor: 'white',
+                                title: {
+                                    text: '不合格单数据统计总表',
+                                    fontColor: 'black',
+                                    left: 'center'
+
+                                },
+                                tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {
+                                        type: 'shadow'
+                                    }
+                                },
+                                xAxis: {
+                                    type: 'value',
+                                    max: 15,
+                                    axisLabel: {
+                                        color: fontColor,
+                                    },
+                                    splitLine: {
+                                        lineStyle: {
+                                            type: 'dashed',
+                                            color: fontColor
+                                        }
+                                    },
+                                    axisLine: {
+                                        show: true,
+                                        lineStyle: {
+                                            color: fontColor
+                                        }
+                                    },
+
+                                },
+                                yAxis: {
+                                    type: 'category',
+                                    data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021'],
+                                    axisLabel: {
+                                        color: fontColor,
+                                    },
+                                    axisLine: {
+                                        show: true,
+                                        lineStyle: {
+                                            color: fontColor
+                                        }
+                                    },
+                                },
+                                grid: [{
+                                    bottom: '50%',
+                                    top: '15%',
+                                    left: '15%',
+                                    right: '10%',
+                                }],
+                                series: [{
+                                    name: '不合格次数统计',
+                                    type: 'bar',
+                                    data: year_data
+                                },
+                                    {
+                                        name: '不合格类别',
+                                        type: 'pie',
+                                        radius: '55%',
+                                        //center: ['50%', '50%'],
+                                        data: piedata1,
+                                        bottom: '0%',
+                                        top: '55%',
+                                        left: '0%',
+                                        right: '65%',
+                                    },
+                                    {
+                                        name: '处置方式统计',
+                                        type: 'pie',
+                                        radius: '55%',
+                                        //center: ['50%', '50%'],
+                                        data: piedata2,
+                                        bottom: '0%',
+                                        top: '55%',
+                                        left: '33%',
+                                        right: '32%',
+                                    },
+                                ]
+                            };
+                        option4 && myChart.setOption(option4);
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseThree">
+                        外协问题数据统计
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div>
+                    <form method="get" style="font-size: medium">
+                        <div class="form-group col-lg-4">
+                            <label class="col-lg-4 control-label">起始时间：</label>
+                            <div class="col-lg-6">
+                                <input type="date" class="form-control" id="begin_date3" name="begin_date3"
+                                       style="font-size:9pt" value={{ date3.begin_date3 }}>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label class="col-lg-4 control-label">终止时间：</label>
+                            <div class="col-lg-6">
+                                <input type="date" class="form-control" id="end_date3" name="end_date3"
+                                       style="font-size:9pt" value={{ date3.end_date3 }}>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-info" style="font-size:10pt">统计数据
+                        </button>
+                    </form>
+                    <div id="com_out" style="display:inline-block;width: 700px;height: 300px;"></div>
+                    <script type="text/javascript">
+                        var chartDom = document.getElementById('com_out');
+                        var myChart = echarts.init(chartDom);
+                        var data5 = {{ completions_out_data|safe }}
+                            option5 = {
+                                title: {
+                                    text: '外协问题完成情况统计',
+                                    subtext: '情况统计',
+                                    left: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'item'
+                                },
+                                toolbox: {
+                                    show: true,
+                                    feature: {
+                                        mark: {show: true},
+                                        dataView: {show: true, readOnly: false},
+                                        restore: {show: true},
+                                        saveAsImage: {show: true}
+                                    }
+                                },
+                                legend: {
+                                    orient: 'vertical',
+                                    left: 'left',
+                                },
+                                series: [
+                                    {
+                                        name: '完成情况',
+                                        type: 'pie',
+                                        radius: '45%',
+                                        data: data5,
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+                        option5 && myChart.setOption(option5);
+                    </script>
+
+                    <div id="inst" style="display:inline-block;width: 600px;height: 300px;"></div>
+                    <script type="text/javascript">
+                        var chartDom = document.getElementById('inst');
+                        var myChart = echarts.init(chartDom);
+                        var data6 = {{ institution_data|safe }}
+                            option6 = {
+                                title: {
+                                    text: '问题供应商',
+                                    subtext: '数据统计',
+                                    left: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'item'
+                                },
+                                toolbox: {
+                                    show: true,
+                                    feature: {
+                                        mark: {show: true},
+                                        dataView: {show: true, readOnly: false},
+                                        restore: {show: true},
+                                        saveAsImage: {show: true}
+                                    }
+                                },
+                                legend: {
+                                    orient: 'vertical',
+                                    left: 'left',
+                                },
+                                series: [
+                                    {
+                                        name: '供应商',
+                                        type: 'pie',
+                                        radius: '45%',
+                                        data: data6,
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+                        option6 && myChart.setOption(option6);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#collapseOne').collapse('hide')
+        });
+        $(function () {
+            $('#collapseTwo').collapse('hide')
+        });
+        $(function () {
+            $('#collapseThree').collapse('hide')
+        });
+    </script>
+{% endblock %}
+
+
+
