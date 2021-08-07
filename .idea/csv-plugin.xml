@@ -94,6 +94,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Search\views.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Statistics\views.py">
           <value>
             <Attribute>

@@ -19,16 +19,9 @@ def statistics_req(request):
         date = {'begin_date': begin_date, 'end_date': end_date}
 
         datalist = Require.objects.filter(date__range=(begin_date, end_date)).values(
-            'ID',
             'customer',
             'product_type',
-            'product_code',
             'date',
-            'place',
-            'condition',
-            'nandian',
-            'attention',
-            'inputfile',
         )
         customers = []
         customersDict = {}
@@ -69,7 +62,7 @@ def statistics_req(request):
                        "yearsNum": yearsNum})
 
 
-def get_data(list):
+def get_pie_data(list):
     dict = {}
     data = []
     for i in list:
@@ -83,6 +76,16 @@ def get_data(list):
         dataDict["name"] = key
         data.append(dataDict)
     return data
+
+
+def get_bar_data(list1):
+    dict = {}
+    for i in list1:
+        if i not in dict.keys():
+            dict[i] = 1
+        else:
+            dict[i] += 1
+    return list(dict.keys()), list(dict.values())
 
 
 def statistics_man(request):
@@ -180,12 +183,12 @@ def statistics_man(request):
             institutions.append(item["institution"])
             completions_out.append(item["completion"])
 
-        type_data = get_data(types)
-        part_data = get_data(parts)
-        team_data = get_data(teams)
-        handle_data = get_data(handles)
-        institution_data = get_data(institutions)
-        completions_out_data = get_data(completions_out)
+        type_data = get_pie_data(types)
+        part_data = get_pie_data(parts)
+        team_data = get_pie_data(teams)
+        handle_data = get_pie_data(handles)
+        institution_data = get_pie_data(institutions)
+        completions_out_data = get_pie_data(completions_out)
         for y in years:
             yearsNum[y - 2014] += 1
         num_not = 0
@@ -256,8 +259,8 @@ def statistics_mtn(request):
             chargers.append(item["charger"])
             risks.append(item["risk_level"])
             completions.append(item["completion"])
-        charger_data = get_data(chargers)
-        risk_data = get_data(risks)
+        charger_data = get_pie_data(chargers)
+        risk_data = get_pie_data(risks)
 
         num_not = 0
         num_done = 0
@@ -304,7 +307,7 @@ def statistics_exp(request):
     for item in datalist:
         chargers.append(item["charger"])
         years.append(eval(item["date"][0:4]))
-    charger_data = get_data(chargers)
+    charger_data = get_pie_data(chargers)
     for y in years:
         yearsNum[y - 2014] += 1
     return render(request, 'statistics_exp.html',
@@ -315,93 +318,140 @@ def statistics_exp(request):
                   })
 
 
+def get_option(begin_date, end_date, type, data_type):
+    datalist_req = Require.objects.filter(date__range=(begin_date, end_date)).values(
+        'customer',
+        'date',
+        'product_type',
+        'place'
+    )
+    datalist_rec = ManReceive.objects.filter(date__range=(begin_date, end_date)).values(
+        'part',
+        'banzu'
+    )
+    datalist_unq = ManUnqual.objects.filter(date__range=(begin_date, end_date)).values(
+        'type',
+        'chuzhi'
+    )
+    datalist_out = ManOuter.objects.filter(date__range=(begin_date, end_date)).values(
+        'institution'
+    )
+    datalist_fau = Fault.objects.filter(date__range=(begin_date, end_date)).values(
+        'charger',
+    )
+    datalist_exp = Test.objects.filter(date__range=(begin_date, end_date)).values(
+        'charger',
+    )
+    table_types = [
+        "req_customer",
+        "req_product_type",
+        "req_place",
+        "rec_part",
+        "rec_banzu",
+        "unq_type",
+        "unq_chuzhi",
+        "out_institution",
+        "fau_charger",
+        "exp_charger"]
+
+    name = []
+    value = []
+    option_data_dict = {}
+    if data_type == 'null':
+        option_data_dict = {'type': 'null'}
+        return option_data_dict
+    elif data_type == "req_year":
+        years = []
+        value = [0, 0, 0, 0, 0, 0, 0, 0]
+        name = ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
+        for item in datalist_req:
+            years.append(eval(item["date"][0:4]))
+        for y in years:
+            value[y - 2014] += 1
+
+    else:
+        list = []
+        for table_type in table_types:
+            if table_type == data_type:
+                for item in locals()['datalist_' + table_type[:3]]:
+                    list.append(item[table_type[4:]])
+                name, value = get_bar_data(list)
+
+    if type == 'bar':
+        option_data_dict['type'] = 'bar'
+        option_data_dict['name'] = name
+        option_data_dict['value'] = value
+    elif type == 'line':
+        option_data_dict['type'] = 'line'
+        option_data_dict['name'] = name
+        option_data_dict['value'] = value
+    elif type == 'pie':
+        data = []
+        i = 0
+        for v in value:
+            dataDict = {}
+            dataDict["value"] = v
+            dataDict["name"] = name[i]
+            data.append(dataDict)
+            i += 1
+        option_data_dict['type'] = 'pie'
+        option_data_dict['data'] = data
+    else:
+        data = []
+        i = 0
+        for v in value:
+            dataDict = {}
+            dataDict["value"] = v
+            dataDict["name"] = name[i]
+            data.append(dataDict)
+            i += 1
+        option_data_dict['type'] = 'nanding'
+        option_data_dict['data'] = data
+    return option_data_dict
+
+
 def statistics_custom(request):
     if request.method == "GET":
-        if request.GET.get("begin_date") is not None:
-            begin_date = request.GET.get("begin_date")
-            end_date = request.GET.get("end_date")
+        if request.GET.get("begin_date1") is not None:
+            begin_date1 = request.GET.get("begin_date1")
+            end_date1 = request.GET.get("end_date1")
         else:
-            begin_date = '2010-01-01'  # 拿到最早的日期
-            end_date = str(datetime.datetime.now())[:10]  # 拿到现在的日期
-        date = {'begin_date': begin_date, 'end_date': end_date}
-        datalist_req = Require.objects.filter(date__range=(begin_date, end_date)).values(
-            'customer',
-            'product_type',
-            'place'
-        )
-        datalist_rec = ManReceive.objects.filter(date__range=(begin_date, end_date)).values(
-            'part',
-            'banzu'
-        )
-        datalist_unq = ManUnqual.objects.filter(date__range=(begin_date, end_date)).values(
-            'type',
-            'chuzhi'
-        )
-        datalist_out = ManOuter.objects.filter(date__range=(begin_date, end_date)).values(
-            'institution'
-        )
-        datalist_fault = Fault.objects.filter(date__range=(begin_date, end_date)).values(
-            'charger',
-        )
-        datalist_exp = Test.objects.filter(date__range=(begin_date, end_date)).values(
-            'charger',
-        )
-        datalistDict = {
-            'datalist_req': datalist_req,
-            'datalist_rec': datalist_rec,
-            'datalist_unq': datalist_unq,
-            'datalist_out': datalist_out,
-            'datalist_fault': datalist_fault,
-            'datalist_exp': datalist_exp,
-        }
-        table_names = [
-            '需求数据-客户',
-            '需求数据-产品类别',
-            '需求数据-交货地点',
-            '验收数据-验收问题部件',
-            '验收数据-验收班组',
-            '不合格单-不合格类型',
-            '不合格单-处置方式',
-            '外协问题-外部负责机构',
-            '故障数据-故障负责人',
-            '试验数据-负责人'
-        ]
-        datalist_names = [['req', 'customer'],
-                          ['req', 'product_type'],
-                          ['req', 'place'],
-                          ['rec', 'part'],
-                          ['rec', 'banzu'],
-                          ['unq', 'type'],
-                          ['unq', 'chuzhi'],
-                          ['out', 'institution'],
-                          ['fault', 'charger'],
-                          ['exp', 'charger']
-                          ]
-        data = []
-        table_titles = []
-        subtexts = []
-        for i in range(6):
-            table_titles.append(request.GET.get("table" + str(i)))
-        for table in table_titles:
-            if table == "暂无":
-                data.append([])
-                subtexts.append('暂无')
-            else:
-                for j in range(10):
-                    if table == table_names[j]:
-                        datalist_name = "datalist_" + datalist_names[j][0]
-                        column_name = datalist_names[j][1]
-                        subtexts.append(table_names[j])
-                        list = []
-                        for item in datalistDict[datalist_name]:
-                            list.append(item[column_name])
-                        data.append(get_data(list))
-                    else:
-                        continue
+            begin_date1 = '2010-01-01'  # 拿到最早的日期
+            end_date1 = str(datetime.datetime.now())[:10]  # 拿到现在的日期
 
+        if request.GET.get("begin_date2") is not None:
+            begin_date2 = request.GET.get("begin_date2")
+            end_date2 = request.GET.get("end_date2")
+        else:
+            begin_date2 = '2010-01-01'  # 拿到最早的日期
+            end_date2 = str(datetime.datetime.now())[:10]  # 拿到现在的日期
+
+        if request.GET.get("begin_date3") is not None:
+            begin_date3 = request.GET.get("begin_date3")
+            end_date3 = request.GET.get("end_date3")
+        else:
+            begin_date3 = '2010-01-01'  # 拿到最早的日期
+            end_date3 = str(datetime.datetime.now())[:10]  # 拿到现在的日期
+
+        date = {'begin_date1': begin_date1, 'end_date1': end_date1,
+                'begin_date2': begin_date2, 'end_date2': end_date2,
+                'begin_date3': begin_date3, 'end_date3': end_date3}
+        type1 = request.GET.get('table1_form')
+        data_type1 = request.GET.get('table1_data')
+        option_data_dict1 = get_option(date['begin_date1'], date['end_date1'], type1, data_type1)
+
+        type2 = request.GET.get('table2_form')
+        data_type2 = request.GET.get('table2_data')
+        option_data_dict2 = get_option(date['begin_date2'], date['end_date2'], type2, data_type2)
+
+        type3 = request.GET.get('table3_form')
+        data_type3 = request.GET.get('table3_data')
+
+        option_data_dict3 = get_option(date['begin_date3'], date['end_date3'], type3, data_type3)
         return render(request, 'statistics_custom.html',
                       {
                           "date": date,
-                          "dataList": data,
-                          "subtexts": subtexts
+                          "option_data_dict1": option_data_dict1,
+                          "option_data_dict2": option_data_dict2,
+                          "option_data_dict3": option_data_dict3,
                       })

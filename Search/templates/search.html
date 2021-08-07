@@ -17,7 +17,7 @@
 </script>
 <div class="container-fluid">
     <div class="col-lg-12 center-block">
-        <h1>模糊查询</h1>
+        <h1>全局模糊查询</h1>
         <form action="/Search/search/" method="post" style="font-size:12pt">
             <div class="form-group col-lg-4">
                 <label class="col-lg-4 control-label">查询关键词：</label>
@@ -42,22 +42,16 @@
     <form action="/Search/search/" method="post" style="font-size:12pt">
         <div class="form-group col-lg-12">
             <div class="form-group col-lg-4">
-                <label class="col-lg-5 control-label">包含以下全部关键词：（逗号分割）</label>
-                <div class="col-lg-7">
-                    <input type="text" class="form-control" id="key_word_all" name="key_word_all" style="font-size:10pt"
-                           placeholder="请输入关键词">
-                </div>
-            </div>
-            <div class="form-group col-lg-4">
-                <label class="col-lg-5 control-label">包含以下任一关键词：（逗号分割）</label>
-                <div class="col-lg-7">
-                    <input type="text" class="form-control" id="key_word_any" name="key_word_any" style="font-size:10pt"
+                <label class="col-lg-4 control-label">精确关键词：</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="key_word_exact" name="key_word_exact"
+                           style="font-size:10pt"
                            placeholder="请输入关键词">
                 </div>
             </div>
         </div>
         <div class="form-group col-lg-12">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-5">
                 <label class="col-lg-3 control-label">数据类别：</label>
                 <div class="col-lg-9">
                     <label class="checkbox-inline"><input type="checkbox" name="req" value="1">需求数据</label>
@@ -66,8 +60,8 @@
                     <label class="checkbox-inline"><input type="checkbox" name="exp" value="1">试验数据</label>
                 </div>
             </div>
-            <div class="form-group col-md-2">
-                <label class="col-lg-5 control-label">查询时限：</label>
+            <div class="form-group col-md-3">
+                <label class="col-lg-4 control-label">查询时限：</label>
                 <div class="col-lg-6">
                     <select class="form-control" name="date" style="font-size:9pt">
                         <option>全部数据</option>
@@ -81,7 +75,7 @@
                 <label class="col-lg-5 control-label">负责人：</label>
                 <div class="col-lg-6">
                     <input type="text" class="form-control" id="charger" name="charger" style="font-size:9pt"
-                           placeholder="请输入负责人">
+                           value="暂无">
                 </div>
             </div>
             <div class="form-group col-lg-2" style="text-align: left">
@@ -93,90 +87,173 @@
     </form>
 
 </div>
-{#        需求表格#}
+
 <div class="col-lg-12" style="font-size:9pt">
     <h3>查询结果</h3>
     <table class="table table-hover table-striped">
         <tbody>
+        {% if search_way == 'fuzzy' %}
+            {% for item in data_list.req %}
+                <tr>
+                    <td width="65px">需求数据</td>
+                    {% for i in item.0.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td width="65px"><a href={{ item.0.ID|ID_edit:"/Requirements/edit_req?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.rec %}
+                <tr>
+                    <td width="65px">验收数据</td>
+                    {% for i in item.0.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td width="65px"><a href={{ item.0.ID|ID_edit:"/Manufacturing/edit_recive?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.unq %}
+                <tr>
+                    <td width="65px">不合格单</td>
+                    {% for i in item.0.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td width="65px"><a href={{ item.0.ID|ID_edit:"/Manufacturing/edit_unqual?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.out %}
+                <tr>
+                    <td width="65px">外协问题</td>
+                    {% for i in item.0.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td width="65px"><a href={{ item.0.ID|ID_edit:"/Manufacturing/edit_outer?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.run %}
+                <tr>
+                    <td width="65px">运维数据</td>
+                    {% for i in item.0.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td><a href={{ item.0.ID|ID_edit:"/Maintenance/edit_runrecord?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.fault %}
+                <tr>
+                    <td width="65px">故障数据</td>
+                    {% for i in item.0.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td><a href={{ item.0.ID|ID_edit:"/Maintenance/edit_fault?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.exp %}
+                <tr>
+                    <td width="65px">试验数据</td>
+                    {% for i in item.0.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td><a href={{ item.0.ID|ID_edit:"/Experiment/edit_test?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+        {% elif search_way == 'exact' %}
+            {% for item in data_list.req %}
+                <tr>
+                    <td width="65px">需求数据</td>
+                    {% for i in item.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
 
-        {% for item in data_list.req %}
-            <tr>
-                <td width="65px">需求数据</td>
-                {% for i in item.values %}
-                    <td>{{ i }}</td>
-                {% endfor %}
-                {% load ID_edit %}
-                <td width="65px"><a href={{ item.ID|ID_edit:"/Requirements/edit_req?ID=" }}><span
-                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
-            </tr>
-        {% endfor %}
-        {% for item in data_list.rec %}
-            <tr>
-                <td width="65px">验收数据</td>
-                {% for i in item.values %}
-                    <td>{{ i }}</td>
-                {% endfor %}
-                {% load ID_edit %}
-                <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_recive?ID=" }}><span
-                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
-            </tr>
-        {% endfor %}
-        {% for item in data_list.unq %}
-            <tr>
-                <td width="65px">不合格单</td>
-                {% for i in item.values %}
-                    <td>{{ i }}</td>
-                {% endfor %}
-                {% load ID_edit %}
-                <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_unqual?ID=" }}><span
-                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
-            </tr>
-        {% endfor %}
-        {% for item in data_list.out %}
-            <tr>
-                <td width="65px">外协问题</td>
-                {% for i in item.values %}
-                    <td>{{ i }}</td>
-                {% endfor %}
-                {% load ID_edit %}
-                <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_outer?ID=" }}><span
-                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
-            </tr>
-        {% endfor %}
-        {% for item in data_list.run %}
-            <tr>
-                <td width="65px">运维数据</td>
-                {% for i in item.values %}
-                    <td>{{ i }}</td>
-                {% endfor %}
-                {% load ID_edit %}
-                <td><a href={{ item.ID|ID_edit:"/Maintenance/edit_runrecord?ID=" }}><span
-                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
-            </tr>
-        {% endfor %}
-        {% for item in data_list.fault %}
-            <tr>
-                <td width="65px">故障数据</td>
-                {% for i in item.values %}
-                    <td>{{ i }}</td>
-                {% endfor %}
-                {% load ID_edit %}
-                <td><a href={{ item.ID|ID_edit:"/Maintenance/edit_fault?ID=" }}><span
-                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
-            </tr>
-        {% endfor %}
-        {% for item in data_list.exp %}
-            <tr>
-                <td width="65px">试验数据</td>
-                {% for i in item.values %}
-                    <td>{{ i }}</td>
-                {% endfor %}
-                {% load ID_edit %}
-                <td><a href={{ item.ID|ID_edit:"/Experiment/edit_test?ID=" }}><span
-                        class="glyphicon glyphicon-edit"></span> 编辑</a></td>
-            </tr>
-        {% endfor %}
-
+                    {% load ID_edit %}
+                    <td width="65px"><a href={{ item.ID|ID_edit:"/Requirements/edit_req?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.rec %}
+                <tr>
+                    <td width="65px">验收数据</td>
+                    {% for i in item.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_recive?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.unq %}
+                <tr>
+                    <td width="65px">不合格单</td>
+                    {% for i in item.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_unqual?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.out %}
+                <tr>
+                    <td width="65px">外协问题</td>
+                    {% for i in item.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td width="65px"><a href={{ item.ID|ID_edit:"/Manufacturing/edit_outer?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.run %}
+                <tr>
+                    <td width="65px">运维数据</td>
+                    {% for i in item.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td><a href={{ item.ID|ID_edit:"/Maintenance/edit_runrecord?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.fault %}
+                <tr>
+                    <td width="65px">故障数据</td>
+                    {% for i in item.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td><a href={{ item.ID|ID_edit:"/Maintenance/edit_fault?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+            {% for item in data_list.exp %}
+                <tr>
+                    <td width="65px">试验数据</td>
+                    {% for i in item.values %}
+                        <td>{{ i }}</td>
+                    {% endfor %}
+                    {% load ID_edit %}
+                    <td><a href={{ item.ID|ID_edit:"/Experiment/edit_test?ID=" }}><span
+                            class="glyphicon glyphicon-edit"></span> 详情</a></td>
+                </tr>
+            {% endfor %}
+        {% elif search_way == 'None' %}
+            <div class="col-lg-12">
+                <h3>查询无结果</h3>
+            </div>
+        {% endif %}
 
         </tbody>
     </table>
