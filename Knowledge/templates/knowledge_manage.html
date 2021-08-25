@@ -1,0 +1,81 @@
+{% extends 'knowledge_template.html' %}
+
+{% block content %}
+    <h1>知识管理</h1>
+    <div class="col-lg-6" style="font-size:11pt">
+        <h2>已上传知识文件管理：</h2>
+        <table class="table table-hover table-striped " style="font-size: 10pt">
+            <thead>
+            <tr>
+                <th>文件更新日期</th>
+                <th>知识类别</th>
+                <th>知识关键词</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in knowledge_list %}
+                <tr>
+
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.keyword_list }}</td>
+                    <td>
+                        {% load ID_edit %}
+                        <a href={{ item.name|ID_edit:"/Knowledge/knowledge_show/?classes=" }}>查看：{{ item.name }}</a>|
+                        <a href={{ item.name|ID_edit:"/Knowledge/delete_file/?name=" }}><span
+                                class="glyphicon glyphicon-trash"></span>删除知识</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-lg-6">
+        <form method="post" action="/Knowledge/knowledge_manage/" style="font-size: 11pt">
+            <h2 class="col-lg-6">知识文件细则管理:</h2>
+            <label class="col-lg-11 control-label">文件:</label>
+            <select class="form-control col-lg-2" name="classes" style="font-size:8pt">
+                {% for key in classes %}
+                    <option>{{ key }}</option>
+                {% endfor %}
+            </select>
+            <label class="col-lg-11 control-label">输入条目关键词:</label>
+            <input type="text" class="form-control col-lg-4" id="keyword" name="keyword"
+                   style="font-size:8pt">
+            <button type="submit" class="btn btn-outline-info col-lg-1"
+                    style="font-size:10pt">查看
+            </button>
+        </form>
+        <table class="table table-hover table-striped col-lg-6" style="font-size: 10pt">
+            <thead>
+            <tr>
+                <th>主体连接点</th>
+                <th>连接</th>
+                <th>客体连接点</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in datalist %}
+                <tr>
+
+                    <td>{{ item.process }}</td>
+                    <td>{{ item.relation }}</td>
+                    <td>{{ item.standard }}</td>
+                    <td>
+                        {% load ID_edit %}
+                        <a href={{ item.id|ID_edit:"/Knowledge/edit_knowledge?ID=" }}><span
+                                class="glyphicon glyphicon-edit"></span> 编辑</a>|
+                        <a href={{ item.id|ID_edit:"/Knowledge/delete_knowledge?ID=" }}><span
+                                class="glyphicon glyphicon-trash"></span> 删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

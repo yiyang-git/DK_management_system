@@ -1,0 +1,143 @@
+{% extends 'knowledge_template.html' %}
+
+{% block content %}
+    <h1>知识展示</h1>
+    <div class="col-lg-6">
+        <form method="get" action="/Knowledge/knowledge_show/" style="font-size: 16px">
+            <label class="col-lg-11 control-label">选择知识文件:</label>
+            <select class="form-control col-lg-4" name="classes" style="font-size:9pt">
+                {% for key in classes %}
+                    <option>{{ key }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-outline-info col-lg-2"
+                    style="font-size:10pt">查看
+            </button>
+        </form>
+    </div>
+
+    <div id="knowledge" class="col-lg-12" style="width: 1800px;height: 600px;"></div>
+    <script type="text/javascript">
+        var chartDom = document.getElementById('knowledge');
+        var myChart = echarts.init(chartDom);
+        var plot = {{ plot|safe }};
+        var link = {{ link|safe }};
+        var len = {{ len|safe }};
+        var categories = [];
+        for (var i = 0; i < 4; i++) {
+            categories[i] = {
+                name: '类目' + i
+            };
+        }
+        var data = [];
+        for (var j = 0; j < len; j++) {
+            var n = plot.name[j];
+            var s = plot.symbolsize[j];
+            var c = 1
+            if (s == 50) {
+                c = 0
+            } else if (s == 60) {
+                c = 1
+            } else if (s == 80) {
+                c = 2
+            } else if (s == 100) {
+                c = 3
+            }
+            data[j] = {
+                name: n,
+                des: plot.des[j],
+                symbolSize: s,
+                category: c,
+            };
+        }
+        var links = [];
+        for (var k = 0; k < len; k++) {
+            var s = link.source[k];
+            var t = link.target[k];
+            links[k] = {
+                source: s,
+                target: t,
+                name: link.name[k],
+                des: link.des[k],
+            };
+        }
+        option = {
+            title: {
+                text: '知识展示图'
+            },
+            tooltip: {
+                formatter: function (x) {
+                    return x.data.des;
+                }
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            legend: [{
+                // selectedMode: 'single',
+                data: categories.map(function (a) {
+                    return a.name;
+                })
+            }],
+            series: [{
+                type: 'graph', // 类型:关系图
+                layout: 'force', //图的布局，类型为力导图
+                symbolSize: 40, // 调整节点的大小
+                roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [2, 10],
+                edgeLabel: {
+                    normal: {
+                        textStyle: {
+                            fontSize: 20
+                        }
+                    }
+                },
+                force: {
+                    repulsion: 2500,
+                    edgeLength: [10, 50]
+                },
+                draggable: true,
+                lineStyle: {
+                    normal: {
+                        width: 2,
+                        color: '#4b565b',
+                    }
+                },
+                edgeLabel: {
+                    normal: {
+                        show: true,
+                        formatter: function (x) {
+                            return x.data.name;
+                        }
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        textStyle: {}
+                    }
+                },
+
+                // 数据
+                data: data,
+                links: links,
+                categories: categories,
+            }]
+        };
+
+        myChart.setOption(option);
+    </script>
+
+{% endblock %}

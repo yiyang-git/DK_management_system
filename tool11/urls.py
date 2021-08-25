@@ -28,5 +28,6 @@ urlpatterns = [
     path('Experiment/', include('Experiment.urls')),
     path('Helps/', include('Helps.urls')),
     path('Statistics/', include('Statistics.urls')),
-    path('Search/', include('Search.urls'))
+    path('Search/', include('Search.urls')),
+    path('Knowledge/', include('Knowledge.urls'))
 ]

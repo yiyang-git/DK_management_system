@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'Experiment',
     'Helps',
     'Statistics',
-    'Search'
+    'Search',
+    'Knowledge'
 ]
 
 MIDDLEWARE = [

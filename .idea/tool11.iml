@@ -20,6 +20,8 @@
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="echarts" level="application" />
     <orderEntry type="library" name="popper" level="application" />
+    <orderEntry type="library" name="jquery-treegrid" level="application" />
+    <orderEntry type="library" name="bootstrap-table" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

@@ -20,7 +20,7 @@ def add_req(request):
         nandian = request.POST.get('nandian')
         attention = request.POST.get('attention')
         inputfile = request.POST.get('inputfile')
-        print(customer, product_type, product_code, date, place, condition, nandian, attention, inputfile)
+
         record = Require(
             ID=ID[0],
             customer=customer,

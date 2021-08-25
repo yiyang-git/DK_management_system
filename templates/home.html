@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>主页</title>
-
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"/>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-{#    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">#}
+    {#    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">#}
 {#    <link rel="stylesheet" href="static/css/style1.css">#}
 {#    <link rel="stylesheet" href="static/css/font-awesome.css">#}
 
@@ -18,31 +18,33 @@
 
 </head>
 <body>
-    <div id="index_page"></div>
-    {#在此处定义了一个div块，id叫index_page#}
-    <header>
-        <div id="showcase">
-            <div class="container">
-                <div class="showcase-content">
-                    <h1>欢迎使用</h1>
-                    <h1 class="toll-primary">数据知识集成管理工具</h1>
-                    <p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        !!!!!!!!!!!#!!!</p>
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+{#在此处定义了一个div块，id叫index_page#}
+<header>
+    <div id="showcase">
+        <div class="container">
+            <div class="showcase-content">
+                <h1 style="color: #1b1e21">欢迎使用</h1>
+                <h1 class="toll-primary">数据知识集成管理工具</h1>
+                <p>2021年开发</p>
 
-                </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
 
-    <section id="home-info" class="bg-1">
-        <div class="info-img"></div>
-        <div class="info-content">
-        <h2><span class="toll-primary">中铁重工</span>介绍</h2>
-        <p>中铁重工有限公司（China Railway Heavy Machinery Co.Ltd，缩写CRHM），原武汉中铁工程机械厂，
-            隶属于中国中铁股份有限公司、中铁高新工业股份有限公司，始建于1958年，位于九省通衢的武汉市，毗邻雄
-            伟壮观的武汉长江二桥和风景优美的东湖，是一个集设计、制造、安装、维修为一体的工程机械科技型企业。</p>
-        <a class="btn" href="https://baike.baidu.com/item/%E4%B8%AD%E9%93%81%E9%87%8D%E5%B7%A5%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/293120">阅读更多</a>
+<section id="home-info" class="bg-1">
+    <div class="info-img"></div>
+    <div class="info-content">
+        <h2><span class="toll-primary">数据知识集成管理工具</span>介绍</h2>
+        <h5>数据知识集成管理工具对需求、设计、制造、运维等全业务领域的多源异构数据资源及产品设计知识进行封装，构建索引并进行数据与知识储存，
+            最终实现数据与知识的集中管控。作为支持产品自适应设计的大数据处理与知识管理平台的数据与知识源，
+            数据知识集成管理工具支持用户通过大数据处理与知识管理平台进行数据与知识访问。</h5>
+        <a class="btn" href="/Helps/documentations/">查看帮助</a>
     </div>
 </section>
 
@@ -69,21 +71,11 @@
     </div>
     <div class="box bg-3">
         <i class="fa fa-flask fa-3x" aria-hidden="true"></i>
-        <h3>实验数据</h3>
-        <p>实验数据</p>
+        <h3>试验数据</h3>
+        <p>试验数据</p>
     </div>
 </section>
 <div class="clr"></div>
-
-
-
-
-
-<script>
-    $('#index_page').load('/static/html/index.html')
-    {#假如此元素内部的代码没有位于某个函数中，那么这些代码会在页面被加载时被立即执行。意义是：在id为index_page的元素里导入后面的结果#}
-</script>
-
 
 
 </body>

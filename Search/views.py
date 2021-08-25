@@ -39,10 +39,7 @@ def search(request):
             cases = Search.objects.all()
             for a in cases:
                 text_base.append(str(a.document))
-            # jieba.suggest_freq('微风化', True)  # 手动增加风化的词频
-            # jieba.suggest_freq('中风化', True)
-            # jieba.suggest_freq('强风化', True)
-            # jieba.suggest_freq('全风化', True)
+
             # 1.提取实例库中物料类型属性的全部数据构成text_base，将text_base中的每条数据进行分词得到words_base
             words_base = [[i for i in jieba.lcut(item)] for item in text_base]
             # 2.生成词典

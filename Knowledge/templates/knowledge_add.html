@@ -1,0 +1,29 @@
+{% extends 'knowledge_template.html' %}
+
+{% block content %}
+
+    <div class="col-lg-9">
+        <h2>知识录入</h2>
+        <p style="font-size: 16px">可使用CSV文件进行设计知识的导入</p>
+        <div class="col-lg-5">
+            <form method="post" action="/Knowledge/knowledge_add/" enctype="multipart/form-data"
+                  style="font-size: 16px">
+                {% csrf_token %}
+
+                <div class="col-lg-9">
+                    <label class="col-lg-12 control-label">上传CSV文件:utf-8编码:</label>
+                    <input id="csv_file" name="csv_file" type="file" class="file">
+
+                </div>
+                <div class="col-lg-3">
+                    <button type="submit" class="btn btn-outline-info" onclick="return confirm('确定提交当前数据？')"
+                            style="font-size:10pt">提交数据
+                    </button>
+                </div>
+            </form>
+        </div>
+        {#    <div class="col-lg-5">#}
+        {#        <img width="650" height="130" src="/static/img/knowledge_example.png"/>#}
+        {#    </div>#}
+    </div>
+{% endblock %}

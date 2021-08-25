@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>知识管理</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/5.0.0/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+</head>
+<body>
+
+
+<div id="index_page"></div>
+<script>
+    $('#index_page').load('/static/html/index.html')
+</script>
+<div class="container-fluid">
+    <h1>设计知识管理</h1>
+    <div class="col-lg-1" style="border-right-style: solid; border-right-width: 3px">
+        <p class="menu"><a href="/Knowledge/knowledge_show/" style="font-size:12pt">知识展示</a></p>
+        <p class="menu"><a href="/Knowledge/knowledge_add/" style="font-size:12pt">知识录入</a></p>
+        <p class="menu"><a href="/Knowledge/knowledge_manage/" style="font-size:12pt">知识管理</a></p>
+    </div>
+    <div class="container-fluid col-lg-11">
+        {% block content %}
+            “此处是要展示的数据统计信息”
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

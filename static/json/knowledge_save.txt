@@ -1,0 +1,2 @@
+{'type': '掘进机', 'date': '2021-08-25', 'name': 'juejin_data.csv', 'keyword_list': ['客户', '产品类别', '同类型', '盾构机', '企业']}
+{'type': '盾构机', 'date': '2021-08-25', 'name': 'dungou_data.csv', 'keyword_list': ['\ufeff盾构机', '设计任务', '客户', '工号', '方案图号']}
